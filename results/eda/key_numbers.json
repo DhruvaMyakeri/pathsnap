@@ -1,0 +1,98 @@
+{
+  "partitions": {
+    "train": {
+      "trips": 80,
+      "gps_rows": 208417,
+      "usable_points": 208417,
+      "dropped_points": 0,
+      "points_per_trip_min_median_max": [
+        361,
+        1529,
+        19313
+      ],
+      "total_hours": 126.23121083333332,
+      "total_km": 2981.283149282912,
+      "share_1s_steps": 0.96503741534149,
+      "steps_gt_10s": 590,
+      "trips_with_gap_gt_10s": 40,
+      "steps_gt_60s": 69,
+      "trips_with_gap_gt_60s": 22,
+      "max_gap_s": 153064.0,
+      "steps_gt_70mps": 150,
+      "missing_values_all_files": 0,
+      "nodes_median": 9608,
+      "nodes_max": 155003,
+      "arcs_median": 19526,
+      "arcs_max": 307392,
+      "twin_share_mean": 0.921669799883917,
+      "largest_scc_share_median": 0.9641911601989523,
+      "largest_scc_share_min": 0.6358574610244989,
+      "isolated_nodes": 0,
+      "route_broken_links": 13,
+      "trips_with_broken_links": 10,
+      "route_uturns": 46,
+      "route_repeated_arcs": 67,
+      "label_dist_percentiles_m": {
+        "p50": 5.683340218755676,
+        "p75": 10.920194725380703,
+        "p90": 89.76305500345478,
+        "p95": 142.37926924841997,
+        "p99": 208.69701858527606
+      },
+      "share_points_gt_50m": 0.11113776707274359,
+      "trips_with_gt_20pct_far_points": [
+        "00000033",
+        "00000054"
+      ]
+    },
+    "student_test": {
+      "trips": 10,
+      "gps_rows": 19160,
+      "usable_points": 19160,
+      "dropped_points": 0,
+      "points_per_trip_min_median_max": [
+        262,
+        1420,
+        3958
+      ],
+      "total_hours": 5.625,
+      "total_km": 297.4874917569661,
+      "share_1s_steps": 0.9862140992167102,
+      "steps_gt_10s": 27,
+      "trips_with_gap_gt_10s": 2,
+      "steps_gt_60s": 1,
+      "trips_with_gap_gt_60s": 1,
+      "max_gap_s": 210.0,
+      "steps_gt_70mps": 1,
+      "missing_values_all_files": 0,
+      "nodes_median": 6596,
+      "nodes_max": 26635,
+      "arcs_median": 13145,
+      "arcs_max": 56027,
+      "twin_share_mean": 0.9269240346784166,
+      "largest_scc_share_median": 0.9609677685847287,
+      "largest_scc_share_min": 0.8169491525423729,
+      "isolated_nodes": 0,
+      "route_broken_links": 1,
+      "trips_with_broken_links": 1,
+      "route_uturns": 8,
+      "route_repeated_arcs": 255,
+      "label_dist_percentiles_m": {
+        "p50": 5.266308195372279,
+        "p75": 9.042652962763544,
+        "p90": 13.452690374133901,
+        "p95": 16.887500537765145,
+        "p99": 28.174871981269277
+      },
+      "share_points_gt_50m": 0.0014091858037578288,
+      "trips_with_gt_20pct_far_points": []
+    }
+  },
+  "utm_zones": 25,
+  "southern_hemisphere_trips": [
+    "00000071",
+    "00000080",
+    "00000098"
+  ],
+  "runtime_s": 36.23467089998303
+}

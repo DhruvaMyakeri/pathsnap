@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_eba46fca59c5c535a16cd1b8bbdffe84 {
+                    position: relative;
+                    width: 100.0vw;
+                    height: 100.0vh;
+
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>/*
+ * Glyphicons Halflings -- the icon font used by folium's default Awesome Markers
+ * (Icon(prefix="glyphicon")). Extracted from Bootstrap 3's glyphicon rules only.
+ *
+ * folium previously loaded netdna's bootstrap-glyphicons.css, which despite its
+ * name ships a full Bootstrap-3 base stylesheet (normalize reset + global `body`
+ * rules) that leaked onto the host page (GH-1820). This file provides just the
+ * @font-face and .glyphicon/.glyphicon-* rules needed for the markers, with no
+ * page-wide side effects. Font files are served from jsDelivr.
+ */
+@font-face{font-family:'Glyphicons Halflings';src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot');src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;}
+.glyphicon-asterisk:before{content:"\2a";}
+.glyphicon-plus:before{content:"\2b";}
+.glyphicon-euro:before{content:"\20ac";}
+.glyphicon-minus:before{content:"\2212";}
+.glyphicon-cloud:before{content:"\2601";}
+.glyphicon-envelope:before{content:"\2709";}
+.glyphicon-pencil:before{content:"\270f";}
+.glyphicon-glass:before{content:"\e001";}
+.glyphicon-music:before{content:"\e002";}
+.glyphicon-search:before{content:"\e003";}
+.glyphicon-heart:before{content:"\e005";}
+.glyphicon-star:before{content:"\e006";}
+.glyphicon-star-empty:before{content:"\e007";}
+.glyphicon-user:before{content:"\e008";}
+.glyphicon-film:before{content:"\e009";}
+.glyphicon-th-large:before{content:"\e010";}
+.glyphicon-th:before{content:"\e011";}
+.glyphicon-th-list:before{content:"\e012";}
+.glyphicon-ok:before{content:"\e013";}
+.glyphicon-remove:before{content:"\e014";}
+.glyphicon-zoom-in:before{content:"\e015";}
+.glyphicon-zoom-out:before{content:"\e016";}
+.glyphicon-off:before{content:"\e017";}
+.glyphicon-signal:before{content:"\e018";}
+.glyphicon-cog:before{content:"\e019";}
+.glyphicon-trash:before{content:"\e020";}
+.glyphicon-home:before{content:"\e021";}
+.glyphicon-file:before{content:"\e022";}
+.glyphicon-time:before{content:"\e023";}
+.glyphicon-road:before{content:"\e024";}
+.glyphicon-download-alt:before{content:"\e025";}
+.glyphicon-download:before{content:"\e026";}
+.glyphicon-upload:before{content:"\e027";}
+.glyphicon-inbox:before{content:"\e028";}
+.glyphicon-play-circle:before{content:"\e029";}
+.glyphicon-repeat:before{content:"\e030";}
+.glyphicon-refresh:before{content:"\e031";}
+.glyphicon-list-alt:before{content:"\e032";}
+.glyphicon-flag:before{content:"\e034";}
+.glyphicon-headphones:before{content:"\e035";}
+.glyphicon-volume-off:before{content:"\e036";}
+.glyphicon-volume-down:before{content:"\e037";}
+.glyphicon-volume-up:before{content:"\e038";}
+.glyphicon-qrcode:before{content:"\e039";}
+.glyphicon-barcode:before{content:"\e040";}
+.glyphicon-tag:before{content:"\e041";}
+.glyphicon-tags:before{content:"\e042";}
+.glyphicon-book:before{content:"\e043";}
+.glyphicon-print:before{content:"\e045";}
+.glyphicon-font:before{content:"\e047";}
+.glyphicon-bold:before{content:"\e048";}
+.glyphicon-italic:before{content:"\e049";}
+.glyphicon-text-height:before{content:"\e050";}
+.glyphicon-text-width:before{content:"\e051";}
+.glyphicon-align-left:before{content:"\e052";}
+.glyphicon-align-center:before{content:"\e053";}
+.glyphicon-align-right:before{content:"\e054";}
+.glyphicon-align-justify:before{content:"\e055";}
+.glyphicon-list:before{content:"\e056";}
+.glyphicon-indent-left:before{content:"\e057";}
+.glyphicon-indent-right:before{content:"\e058";}
+.glyphicon-facetime-video:before{content:"\e059";}
+.glyphicon-picture:before{content:"\e060";}
+.glyphicon-map-marker:before{content:"\e062";}
+.glyphicon-adjust:before{content:"\e063";}
+.glyphicon-tint:before{content:"\e064";}
+.glyphicon-edit:before{content:"\e065";}
+.glyphicon-share:before{content:"\e066";}
+.glyphicon-check:before{content:"\e067";}
+.glyphicon-move:before{content:"\e068";}
+.glyphicon-step-backward:before{content:"\e069";}
+.glyphicon-fast-backward:before{content:"\e070";}
+.glyphicon-backward:before{content:"\e071";}
+.glyphicon-play:before{content:"\e072";}
+.glyphicon-pause:before{content:"\e073";}
+.glyphicon-stop:before{content:"\e074";}
+.glyphicon-forward:before{content:"\e075";}
+.glyphicon-fast-forward:before{content:"\e076";}
+.glyphicon-step-forward:before{content:"\e077";}
+.glyphicon-eject:before{content:"\e078";}
+.glyphicon-chevron-left:before{content:"\e079";}
+.glyphicon-chevron-right:before{content:"\e080";}
+.glyphicon-plus-sign:before{content:"\e081";}
+.glyphicon-minus-sign:before{content:"\e082";}
+.glyphicon-remove-sign:before{content:"\e083";}
+.glyphicon-ok-sign:before{content:"\e084";}
+.glyphicon-question-sign:before{content:"\e085";}
+.glyphicon-info-sign:before{content:"\e086";}
+.glyphicon-screenshot:before{content:"\e087";}
+.glyphicon-remove-circle:before{content:"\e088";}
+.glyphicon-ok-circle:before{content:"\e089";}
+.glyphicon-ban-circle:before{content:"\e090";}
+.glyphicon-arrow-left:before{content:"\e091";}
+.glyphicon-arrow-right:before{content:"\e092";}
+.glyphicon-arrow-up:before{content:"\e093";}
+.glyphicon-arrow-down:before{content:"\e094";}
+.glyphicon-share-alt:before{content:"\e095";}
+.glyphicon-resize-full:before{content:"\e096";}
+.glyphicon-resize-small:before{content:"\e097";}
+.glyphicon-exclamation-sign:before{content:"\e101";}
+.glyphicon-gift:before{content:"\e102";}
+.glyphicon-leaf:before{content:"\e103";}
+.glyphicon-eye-open:before{content:"\e105";}
+.glyphicon-eye-close:before{content:"\e106";}
+.glyphicon-warning-sign:before{content:"\e107";}
+.glyphicon-plane:before{content:"\e108";}
+.glyphicon-random:before{content:"\e110";}
+.glyphicon-comment:before{content:"\e111";}
+.glyphicon-magnet:before{content:"\e112";}
+.glyphicon-chevron-up:before{content:"\e113";}
+.glyphicon-chevron-down:before{content:"\e114";}
+.glyphicon-retweet:before{content:"\e115";}
+.glyphicon-shopping-cart:before{content:"\e116";}
+.glyphicon-folder-close:before{content:"\e117";}
+.glyphicon-folder-open:before{content:"\e118";}
+.glyphicon-resize-vertical:before{content:"\e119";}
+.glyphicon-resize-horizontal:before{content:"\e120";}
+.glyphicon-hdd:before{content:"\e121";}
+.glyphicon-bullhorn:before{content:"\e122";}
+.glyphicon-certificate:before{content:"\e124";}
+.glyphicon-thumbs-up:before{content:"\e125";}
+.glyphicon-thumbs-down:before{content:"\e126";}
+.glyphicon-hand-right:before{content:"\e127";}
+.glyphicon-hand-left:before{content:"\e128";}
+.glyphicon-hand-up:before{content:"\e129";}
+.glyphicon-hand-down:before{content:"\e130";}
+.glyphicon-circle-arrow-right:before{content:"\e131";}
+.glyphicon-circle-arrow-left:before{content:"\e132";}
+.glyphicon-circle-arrow-up:before{content:"\e133";}
+.glyphicon-circle-arrow-down:before{content:"\e134";}
+.glyphicon-globe:before{content:"\e135";}
+.glyphicon-tasks:before{content:"\e137";}
+.glyphicon-filter:before{content:"\e138";}
+.glyphicon-fullscreen:before{content:"\e140";}
+.glyphicon-dashboard:before{content:"\e141";}
+.glyphicon-heart-empty:before{content:"\e143";}
+.glyphicon-link:before{content:"\e144";}
+.glyphicon-phone:before{content:"\e145";}
+.glyphicon-usd:before{content:"\e148";}
+.glyphicon-gbp:before{content:"\e149";}
+.glyphicon-sort:before{content:"\e150";}
+.glyphicon-sort-by-alphabet:before{content:"\e151";}
+.glyphicon-sort-by-alphabet-alt:before{content:"\e152";}
+.glyphicon-sort-by-order:before{content:"\e153";}
+.glyphicon-sort-by-order-alt:before{content:"\e154";}
+.glyphicon-sort-by-attributes:before{content:"\e155";}
+.glyphicon-sort-by-attributes-alt:before{content:"\e156";}
+.glyphicon-unchecked:before{content:"\e157";}
+.glyphicon-expand:before{content:"\e158";}
+.glyphicon-collapse-down:before{content:"\e159";}
+.glyphicon-collapse-up:before{content:"\e160";}
+.glyphicon-log-in:before{content:"\e161";}
+.glyphicon-flash:before{content:"\e162";}
+.glyphicon-log-out:before{content:"\e163";}
+.glyphicon-new-window:before{content:"\e164";}
+.glyphicon-record:before{content:"\e165";}
+.glyphicon-save:before{content:"\e166";}
+.glyphicon-open:before{content:"\e167";}
+.glyphicon-saved:before{content:"\e168";}
+.glyphicon-import:before{content:"\e169";}
+.glyphicon-export:before{content:"\e170";}
+.glyphicon-send:before{content:"\e171";}
+.glyphicon-floppy-disk:before{content:"\e172";}
+.glyphicon-floppy-saved:before{content:"\e173";}
+.glyphicon-floppy-remove:before{content:"\e174";}
+.glyphicon-floppy-save:before{content:"\e175";}
+.glyphicon-floppy-open:before{content:"\e176";}
+.glyphicon-credit-card:before{content:"\e177";}
+.glyphicon-transfer:before{content:"\e178";}
+.glyphicon-cutlery:before{content:"\e179";}
+.glyphicon-header:before{content:"\e180";}
+.glyphicon-compressed:before{content:"\e181";}
+.glyphicon-earphone:before{content:"\e182";}
+.glyphicon-phone-alt:before{content:"\e183";}
+.glyphicon-tower:before{content:"\e184";}
+.glyphicon-stats:before{content:"\e185";}
+.glyphicon-sd-video:before{content:"\e186";}
+.glyphicon-hd-video:before{content:"\e187";}
+.glyphicon-subtitles:before{content:"\e188";}
+.glyphicon-sound-stereo:before{content:"\e189";}
+.glyphicon-sound-dolby:before{content:"\e190";}
+.glyphicon-sound-5-1:before{content:"\e191";}
+.glyphicon-sound-6-1:before{content:"\e192";}
+.glyphicon-sound-7-1:before{content:"\e193";}
+.glyphicon-copyright-mark:before{content:"\e194";}
+.glyphicon-registration-mark:before{content:"\e195";}
+.glyphicon-cloud-download:before{content:"\e197";}
+.glyphicon-cloud-upload:before{content:"\e198";}
+.glyphicon-tree-conifer:before{content:"\e199";}
+.glyphicon-tree-deciduous:before{content:"\e200";}
+.glyphicon-briefcase:before{content:"\1f4bc";}
+.glyphicon-calendar:before{content:"\1f4c5";}
+.glyphicon-pushpin:before{content:"\1f4cc";}
+.glyphicon-paperclip:before{content:"\1f4ce";}
+.glyphicon-camera:before{content:"\1f4f7";}
+.glyphicon-lock:before{content:"\1f512";}
+.glyphicon-bell:before{content:"\1f514";}
+.glyphicon-bookmark:before{content:"\1f516";}
+.glyphicon-fire:before{content:"\1f525";}
+.glyphicon-wrench:before{content:"\1f527";}
+</style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    <div style="position:fixed;bottom:28px;left:28px;z-index:9999;background:white;padding:8px 10px;border:1px solid #888;border-radius:4px;font:13px sans-serif"><b>PathSnap trips (trip centroid)</b><div><span style="display:inline-block;width:10px;height:10px;background:#1f77b4;margin:0 6px 2px 0;border-radius:50%;vertical-align:middle"></span>train</div><div><span style="display:inline-block;width:10px;height:10px;background:#ff7f0e;margin:0 6px 2px 0;border-radius:50%;vertical-align:middle"></span>student_test</div></div>
+    
+            <div class="folium-map" id="map_eba46fca59c5c535a16cd1b8bbdffe84" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_eba46fca59c5c535a16cd1b8bbdffe84 = L.map(
+                "map_eba46fca59c5c535a16cd1b8bbdffe84",
+                {
+                    center: [30.0, 10.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 2,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_c96050c4aef4258a5c1c34875356b363 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_c96050c4aef4258a5c1c34875356b363.addTo(map_eba46fca59c5c535a16cd1b8bbdffe84);
+        
+    
+            var feature_group_e4754afca37118ad4d949bb6180d6096 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_b8ea7ab0404f8fee42185eae086cbf7d = L.circleMarker(
+                [50.128292, 8.603564],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_44f3b0e1baa472b1c47e6478b64b861f = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_35408e8efb7b05962491796ad646ccc7 = $(`<div id="html_35408e8efb7b05962491796ad646ccc7" style="width: 100.0%; height: 100.0%;">trip 00000001 (train)<br>1,315 GPS points<br>50.2 km, 23 min<br>UTM EPSG:32632</div>`)[0];
+                popup_44f3b0e1baa472b1c47e6478b64b861f.setContent(html_35408e8efb7b05962491796ad646ccc7);
+            
+        
+
+        circle_marker_b8ea7ab0404f8fee42185eae086cbf7d.bindPopup(popup_44f3b0e1baa472b1c47e6478b64b861f)
+        ;
+
+        
+    
+    
+            var circle_marker_ae529c331d584d5aea2ecb6fbb1bf1dd = L.circleMarker(
+                [47.690633, 11.042656],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_2989e854dcbf875d3660bb3f7afa1b85 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_bab6478ea3f4002a6f2b4fe01118d336 = $(`<div id="html_bab6478ea3f4002a6f2b4fe01118d336" style="width: 100.0%; height: 100.0%;">trip 00000002 (train)<br>7,243 GPS points<br>55.9 km, 149 min<br>UTM EPSG:32632</div>`)[0];
+                popup_2989e854dcbf875d3660bb3f7afa1b85.setContent(html_bab6478ea3f4002a6f2b4fe01118d336);
+            
+        
+
+        circle_marker_ae529c331d584d5aea2ecb6fbb1bf1dd.bindPopup(popup_2989e854dcbf875d3660bb3f7afa1b85)
+        ;
+
+        
+    
+    
+            var circle_marker_9d7e03dc7cd46ef571ac3cfbc24418a5 = L.circleMarker(
+                [55.983694, 37.17884],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_5f4d891d8813482d3136cfc69431d36d = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_d3c5ac67ade48b0085191a22e9322e2a = $(`<div id="html_d3c5ac67ade48b0085191a22e9322e2a" style="width: 100.0%; height: 100.0%;">trip 00000003 (train)<br>821 GPS points<br>8.4 km, 14 min<br>UTM EPSG:32637</div>`)[0];
+                popup_5f4d891d8813482d3136cfc69431d36d.setContent(html_d3c5ac67ade48b0085191a22e9322e2a);
+            
+        
+
+        circle_marker_9d7e03dc7cd46ef571ac3cfbc24418a5.bindPopup(popup_5f4d891d8813482d3136cfc69431d36d)
+        ;
+
+        
+    
+    
+            var circle_marker_7759c11cbefb4cdf3320ca6f63f4ea9b = L.circleMarker(
+                [52.624652, 12.437313],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_caeb0fa33809b693b83e5a0bc08f4284 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_ac9726e1e6e6cf180faf783bed610836 = $(`<div id="html_ac9726e1e6e6cf180faf783bed610836" style="width: 100.0%; height: 100.0%;">trip 00000004 (train)<br>1,064 GPS points<br>27.9 km, 87 min<br>UTM EPSG:32633</div>`)[0];
+                popup_caeb0fa33809b693b83e5a0bc08f4284.setContent(html_ac9726e1e6e6cf180faf783bed610836);
+            
+        
+
+        circle_marker_7759c11cbefb4cdf3320ca6f63f4ea9b.bindPopup(popup_caeb0fa33809b693b83e5a0bc08f4284)
+        ;
+
+        
+    
+    
+            var circle_marker_6ea20bdfee193d928f3551710fa122db = L.circleMarker(
+                [49.486404, 35.502199],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_3fb11f0572d9091b4998cf14ce79eca4 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_63f424192c2bd4a30abe74ef939a838d = $(`<div id="html_63f424192c2bd4a30abe74ef939a838d" style="width: 100.0%; height: 100.0%;">trip 00000005 (train)<br>1,045 GPS points<br>31.3 km, 17 min<br>UTM EPSG:32636</div>`)[0];
+                popup_3fb11f0572d9091b4998cf14ce79eca4.setContent(html_63f424192c2bd4a30abe74ef939a838d);
+            
+        
+
+        circle_marker_6ea20bdfee193d928f3551710fa122db.bindPopup(popup_3fb11f0572d9091b4998cf14ce79eca4)
+        ;
+
+        
+    
+    
+            var circle_marker_0a9ebbb300b85da29d16da750c07262c = L.circleMarker(
+                [55.4466195, 37.2949655],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_75d1680cf311d3f5427920a6a2cf1fee = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_d1eaa321e2a9db25135bb605404e6288 = $(`<div id="html_d1eaa321e2a9db25135bb605404e6288" style="width: 100.0%; height: 100.0%;">trip 00000006 (train)<br>1,450 GPS points<br>19.4 km, 35 min<br>UTM EPSG:32637</div>`)[0];
+                popup_75d1680cf311d3f5427920a6a2cf1fee.setContent(html_d1eaa321e2a9db25135bb605404e6288);
+            
+        
+
+        circle_marker_0a9ebbb300b85da29d16da750c07262c.bindPopup(popup_75d1680cf311d3f5427920a6a2cf1fee)
+        ;
+
+        
+    
+    
+            var circle_marker_453079b4df40f8ae0bd4f782fb11c810 = L.circleMarker(
+                [34.746999, -86.5748],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_3b60e9ef1919ab2a670da5325a781d87 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_905c3d3bd5c11c77b33013888e143404 = $(`<div id="html_905c3d3bd5c11c77b33013888e143404" style="width: 100.0%; height: 100.0%;">trip 00000008 (train)<br>3,093 GPS points<br>25.0 km, 52 min<br>UTM EPSG:32616</div>`)[0];
+                popup_3b60e9ef1919ab2a670da5325a781d87.setContent(html_905c3d3bd5c11c77b33013888e143404);
+            
+        
+
+        circle_marker_453079b4df40f8ae0bd4f782fb11c810.bindPopup(popup_3b60e9ef1919ab2a670da5325a781d87)
+        ;
+
+        
+    
+    
+            var circle_marker_46869c2b58fdfb92632fc8c5071587fb = L.circleMarker(
+                [55.832108, 37.388599],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_2184f0a71a07e9f6982e20449292da2a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_2303e5ee66580c47d333e31a2c684205 = $(`<div id="html_2303e5ee66580c47d333e31a2c684205" style="width: 100.0%; height: 100.0%;">trip 00000010 (train)<br>2,711 GPS points<br>25.9 km, 45 min<br>UTM EPSG:32637</div>`)[0];
+                popup_2184f0a71a07e9f6982e20449292da2a.setContent(html_2303e5ee66580c47d333e31a2c684205);
+            
+        
+
+        circle_marker_46869c2b58fdfb92632fc8c5071587fb.bindPopup(popup_2184f0a71a07e9f6982e20449292da2a)
+        ;
+
+        
+    
+    
+            var circle_marker_1a3061981ce5eff2cf182b3a633624c0 = L.circleMarker(
+                [56.0510545, 59.869708],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_f09951880150a2484f349bf12c0cffc4 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c6e4f06c24f94663e1b8e76abdb56952 = $(`<div id="html_c6e4f06c24f94663e1b8e76abdb56952" style="width: 100.0%; height: 100.0%;">trip 00000011 (train)<br>2,828 GPS points<br>55.1 km, 62 min<br>UTM EPSG:32640</div>`)[0];
+                popup_f09951880150a2484f349bf12c0cffc4.setContent(html_c6e4f06c24f94663e1b8e76abdb56952);
+            
+        
+
+        circle_marker_1a3061981ce5eff2cf182b3a633624c0.bindPopup(popup_f09951880150a2484f349bf12c0cffc4)
+        ;
+
+        
+    
+    
+            var circle_marker_85bd9cd86016bcff379e11d6b32d0b27 = L.circleMarker(
+                [36.219186, 44.2646175],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_106dc0b182b81e9ecfa12e6b27283d3a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_b19e5fde78458abc655457d2a34b972c = $(`<div id="html_b19e5fde78458abc655457d2a34b972c" style="width: 100.0%; height: 100.0%;">trip 00000012 (train)<br>1,608 GPS points<br>41.6 km, 27 min<br>UTM EPSG:32638</div>`)[0];
+                popup_106dc0b182b81e9ecfa12e6b27283d3a.setContent(html_b19e5fde78458abc655457d2a34b972c);
+            
+        
+
+        circle_marker_85bd9cd86016bcff379e11d6b32d0b27.bindPopup(popup_106dc0b182b81e9ecfa12e6b27283d3a)
+        ;
+
+        
+    
+    
+            var circle_marker_63f3e6cdd7358c63b6b94cf9df17ca66 = L.circleMarker(
+                [43.7869175, 1.7406130000000002],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_908e80f003939ce6d824b9c97517eb56 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_e1cea28fdcbf0959aff9276161c92195 = $(`<div id="html_e1cea28fdcbf0959aff9276161c92195" style="width: 100.0%; height: 100.0%;">trip 00000013 (train)<br>2,580 GPS points<br>74.1 km, 47 min<br>UTM EPSG:32631</div>`)[0];
+                popup_908e80f003939ce6d824b9c97517eb56.setContent(html_e1cea28fdcbf0959aff9276161c92195);
+            
+        
+
+        circle_marker_63f3e6cdd7358c63b6b94cf9df17ca66.bindPopup(popup_908e80f003939ce6d824b9c97517eb56)
+        ;
+
+        
+    
+    
+            var circle_marker_eb38afe857ae7056aeac854cb33224ca = L.circleMarker(
+                [51.725860499999996, 39.1788925],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_2b53d56dfdd6cf9e49d6a9cd3eeaa9f9 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_f88045280280e1941b75db5322e3e71d = $(`<div id="html_f88045280280e1941b75db5322e3e71d" style="width: 100.0%; height: 100.0%;">trip 00000014 (train)<br>448 GPS points<br>6.6 km, 12 min<br>UTM EPSG:32637</div>`)[0];
+                popup_2b53d56dfdd6cf9e49d6a9cd3eeaa9f9.setContent(html_f88045280280e1941b75db5322e3e71d);
+            
+        
+
+        circle_marker_eb38afe857ae7056aeac854cb33224ca.bindPopup(popup_2b53d56dfdd6cf9e49d6a9cd3eeaa9f9)
+        ;
+
+        
+    
+    
+            var circle_marker_f354fb16302ea88fb564ce4d228836cc = L.circleMarker(
+                [55.818103, 37.374075],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_47bcada7fca79bd31a7cf58c808e442a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_8bec4c26696699f421dc7e84239f7923 = $(`<div id="html_8bec4c26696699f421dc7e84239f7923" style="width: 100.0%; height: 100.0%;">trip 00000016 (train)<br>1,305 GPS points<br>16.2 km, 22 min<br>UTM EPSG:32637</div>`)[0];
+                popup_47bcada7fca79bd31a7cf58c808e442a.setContent(html_8bec4c26696699f421dc7e84239f7923);
+            
+        
+
+        circle_marker_f354fb16302ea88fb564ce4d228836cc.bindPopup(popup_47bcada7fca79bd31a7cf58c808e442a)
+        ;
+
+        
+    
+    
+            var circle_marker_50c59f06253a4de362c74c89aa14b48d = L.circleMarker(
+                [40.594304, -8.474615],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_0e1d0626749634fe925cd1338458033b = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_d3bb17afbe1cf8cb3051e2fe184029a5 = $(`<div id="html_d3bb17afbe1cf8cb3051e2fe184029a5" style="width: 100.0%; height: 100.0%;">trip 00000018 (train)<br>379 GPS points<br>6.3 km, 8 min<br>UTM EPSG:32629</div>`)[0];
+                popup_0e1d0626749634fe925cd1338458033b.setContent(html_d3bb17afbe1cf8cb3051e2fe184029a5);
+            
+        
+
+        circle_marker_50c59f06253a4de362c74c89aa14b48d.bindPopup(popup_0e1d0626749634fe925cd1338458033b)
+        ;
+
+        
+    
+    
+            var circle_marker_7f7b53fa9f7295b230a20b9769d7888a = L.circleMarker(
+                [52.1935895, 7.117020999999999],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_a398595869700ac21144c0e4dc8b304c = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c0aa24f7f584998994116ac5eb9a6cfb = $(`<div id="html_c0aa24f7f584998994116ac5eb9a6cfb" style="width: 100.0%; height: 100.0%;">trip 00000019 (train)<br>2,354 GPS points<br>48.8 km, 39 min<br>UTM EPSG:32632</div>`)[0];
+                popup_a398595869700ac21144c0e4dc8b304c.setContent(html_c0aa24f7f584998994116ac5eb9a6cfb);
+            
+        
+
+        circle_marker_7f7b53fa9f7295b230a20b9769d7888a.bindPopup(popup_a398595869700ac21144c0e4dc8b304c)
+        ;
+
+        
+    
+    
+            var circle_marker_09d55422dddc6a678bcba3eb480ba2ff = L.circleMarker(
+                [52.663121, 24.430542],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_50712643b4fe47da8a3a394c1cd6319a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_fb6d431135addcaacdef3ea1af503f5d = $(`<div id="html_fb6d431135addcaacdef3ea1af503f5d" style="width: 100.0%; height: 100.0%;">trip 00000020 (train)<br>2,353 GPS points<br>43.9 km, 39 min<br>UTM EPSG:32635</div>`)[0];
+                popup_50712643b4fe47da8a3a394c1cd6319a.setContent(html_fb6d431135addcaacdef3ea1af503f5d);
+            
+        
+
+        circle_marker_09d55422dddc6a678bcba3eb480ba2ff.bindPopup(popup_50712643b4fe47da8a3a394c1cd6319a)
+        ;
+
+        
+    
+    
+            var circle_marker_f69cfdc096eca8fe81f1af7799c1d623 = L.circleMarker(
+                [15.433761, 106.545004],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_1b2f670b220348beeea606b0cefa4162 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_280f2cb2904b77b32b1641d40f3dcc52 = $(`<div id="html_280f2cb2904b77b32b1641d40f3dcc52" style="width: 100.0%; height: 100.0%;">trip 00000021 (train)<br>15,783 GPS points<br>128.6 km, 310 min<br>UTM EPSG:32648</div>`)[0];
+                popup_1b2f670b220348beeea606b0cefa4162.setContent(html_280f2cb2904b77b32b1641d40f3dcc52);
+            
+        
+
+        circle_marker_f69cfdc096eca8fe81f1af7799c1d623.bindPopup(popup_1b2f670b220348beeea606b0cefa4162)
+        ;
+
+        
+    
+    
+            var circle_marker_32530ab5bedcb0f951d4f89c5ac22cbd = L.circleMarker(
+                [47.8681945, -3.5468595],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_ec04fdd01aa8b1c7905b2e4e513bc877 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_7f970c6d45d8d86949f0d1d8b5e26f0b = $(`<div id="html_7f970c6d45d8d86949f0d1d8b5e26f0b" style="width: 100.0%; height: 100.0%;">trip 00000022 (train)<br>474 GPS points<br>15.7 km, 24 min<br>UTM EPSG:32630</div>`)[0];
+                popup_ec04fdd01aa8b1c7905b2e4e513bc877.setContent(html_7f970c6d45d8d86949f0d1d8b5e26f0b);
+            
+        
+
+        circle_marker_32530ab5bedcb0f951d4f89c5ac22cbd.bindPopup(popup_ec04fdd01aa8b1c7905b2e4e513bc877)
+        ;
+
+        
+    
+    
+            var circle_marker_7c621768ae9d34eb7af5d280bcfd9aa3 = L.circleMarker(
+                [49.269846, 8.592262],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_7c114f83b7901a82c7b3ccfb8c61f90a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_0353851f9525c2c5d5bfb29edaf543cd = $(`<div id="html_0353851f9525c2c5d5bfb29edaf543cd" style="width: 100.0%; height: 100.0%;">trip 00000024 (train)<br>801 GPS points<br>26.7 km, 26 min<br>UTM EPSG:32632</div>`)[0];
+                popup_7c114f83b7901a82c7b3ccfb8c61f90a.setContent(html_0353851f9525c2c5d5bfb29edaf543cd);
+            
+        
+
+        circle_marker_7c621768ae9d34eb7af5d280bcfd9aa3.bindPopup(popup_7c114f83b7901a82c7b3ccfb8c61f90a)
+        ;
+
+        
+    
+    
+            var circle_marker_e51f85e65e8845dcdfbef97102a07f5d = L.circleMarker(
+                [25.725547, -100.355453],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_9336bbcf5c5797484c771fe13aeaad5a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_f59e48c252d3550744ea170cc77b823b = $(`<div id="html_f59e48c252d3550744ea170cc77b823b" style="width: 100.0%; height: 100.0%;">trip 00000025 (train)<br>1,179 GPS points<br>24.2 km, 26 min<br>UTM EPSG:32614</div>`)[0];
+                popup_9336bbcf5c5797484c771fe13aeaad5a.setContent(html_f59e48c252d3550744ea170cc77b823b);
+            
+        
+
+        circle_marker_e51f85e65e8845dcdfbef97102a07f5d.bindPopup(popup_9336bbcf5c5797484c771fe13aeaad5a)
+        ;
+
+        
+    
+    
+            var circle_marker_2f4b31ab17ea3d1d9daf1388d543e494 = L.circleMarker(
+                [37.152306, -80.433071],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_d3ae2cc50e316368f0b02190a5dbd2ed = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_43f0b72d1ba2e4d24c667bca373db6bb = $(`<div id="html_43f0b72d1ba2e4d24c667bca373db6bb" style="width: 100.0%; height: 100.0%;">trip 00000026 (train)<br>361 GPS points<br>8.7 km, 15 min<br>UTM EPSG:32617</div>`)[0];
+                popup_d3ae2cc50e316368f0b02190a5dbd2ed.setContent(html_43f0b72d1ba2e4d24c667bca373db6bb);
+            
+        
+
+        circle_marker_2f4b31ab17ea3d1d9daf1388d543e494.bindPopup(popup_d3ae2cc50e316368f0b02190a5dbd2ed)
+        ;
+
+        
+    
+    
+            var circle_marker_1452ca1677b3cb361575cb66d1af9606 = L.circleMarker(
+                [49.5465835, 18.921325],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_440fdbf56d4e6923361ac67d78ac8311 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_bf513b5d81f752c337610cb2fa2ff1bb = $(`<div id="html_bf513b5d81f752c337610cb2fa2ff1bb" style="width: 100.0%; height: 100.0%;">trip 00000027 (train)<br>694 GPS points<br>9.7 km, 12 min<br>UTM EPSG:32634</div>`)[0];
+                popup_440fdbf56d4e6923361ac67d78ac8311.setContent(html_bf513b5d81f752c337610cb2fa2ff1bb);
+            
+        
+
+        circle_marker_1452ca1677b3cb361575cb66d1af9606.bindPopup(popup_440fdbf56d4e6923361ac67d78ac8311)
+        ;
+
+        
+    
+    
+            var circle_marker_ab52a52cfa78914570d968b973bb64de = L.circleMarker(
+                [54.991811, 60.874696],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_c9fb17d2dc7bc645552f5abb319235df = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_2f7d09bcf5a3c72ea2e909963a1c5c69 = $(`<div id="html_2f7d09bcf5a3c72ea2e909963a1c5c69" style="width: 100.0%; height: 100.0%;">trip 00000028 (train)<br>3,565 GPS points<br>91.2 km, 69 min<br>UTM EPSG:32641</div>`)[0];
+                popup_c9fb17d2dc7bc645552f5abb319235df.setContent(html_2f7d09bcf5a3c72ea2e909963a1c5c69);
+            
+        
+
+        circle_marker_ab52a52cfa78914570d968b973bb64de.bindPopup(popup_c9fb17d2dc7bc645552f5abb319235df)
+        ;
+
+        
+    
+    
+            var circle_marker_5dc2e11b97ddc6b4d850a7afcf042372 = L.circleMarker(
+                [55.810007, 37.357189],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_68209cc9daf485463db1f60326c0c031 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_e0402ba1650a38f4539dabfe9c42c50b = $(`<div id="html_e0402ba1650a38f4539dabfe9c42c50b" style="width: 100.0%; height: 100.0%;">trip 00000029 (train)<br>733 GPS points<br>12.6 km, 12 min<br>UTM EPSG:32637</div>`)[0];
+                popup_68209cc9daf485463db1f60326c0c031.setContent(html_e0402ba1650a38f4539dabfe9c42c50b);
+            
+        
+
+        circle_marker_5dc2e11b97ddc6b4d850a7afcf042372.bindPopup(popup_68209cc9daf485463db1f60326c0c031)
+        ;
+
+        
+    
+    
+            var circle_marker_a2eca3ae3877c488a89e40122c574a7f = L.circleMarker(
+                [53.296538, 50.286848],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_aa29ee0e458e50e6d0b0560691fcdc30 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_9965a87237cf3449052bfd19f2a6ef4f = $(`<div id="html_9965a87237cf3449052bfd19f2a6ef4f" style="width: 100.0%; height: 100.0%;">trip 00000031 (train)<br>4,245 GPS points<br>73.1 km, 71 min<br>UTM EPSG:32639</div>`)[0];
+                popup_aa29ee0e458e50e6d0b0560691fcdc30.setContent(html_9965a87237cf3449052bfd19f2a6ef4f);
+            
+        
+
+        circle_marker_a2eca3ae3877c488a89e40122c574a7f.bindPopup(popup_aa29ee0e458e50e6d0b0560691fcdc30)
+        ;
+
+        
+    
+    
+            var circle_marker_5862b31b3dc52c91a200caa10a3071f4 = L.circleMarker(
+                [52.1333635, 12.754269],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_56eb55e183be1c1efe446e2a90e620e5 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c85f616b0be007f662898e7da57be429 = $(`<div id="html_c85f616b0be007f662898e7da57be429" style="width: 100.0%; height: 100.0%;">trip 00000032 (train)<br>2,464 GPS points<br>97.0 km, 47 min<br>UTM EPSG:32633</div>`)[0];
+                popup_56eb55e183be1c1efe446e2a90e620e5.setContent(html_c85f616b0be007f662898e7da57be429);
+            
+        
+
+        circle_marker_5862b31b3dc52c91a200caa10a3071f4.bindPopup(popup_56eb55e183be1c1efe446e2a90e620e5)
+        ;
+
+        
+    
+    
+            var circle_marker_04f67fffbb08528225f3c3d5829e2a39 = L.circleMarker(
+                [50.029012, 18.697525],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_6d7d49d643137d42fc3c6da2e5052aef = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_52c899f909136397d0d4bee1a7a3598e = $(`<div id="html_52c899f909136397d0d4bee1a7a3598e" style="width: 100.0%; height: 100.0%;">trip 00000033 (train)<br>5,844 GPS points<br>47.9 km, 104 min<br>UTM EPSG:32634</div>`)[0];
+                popup_6d7d49d643137d42fc3c6da2e5052aef.setContent(html_52c899f909136397d0d4bee1a7a3598e);
+            
+        
+
+        circle_marker_04f67fffbb08528225f3c3d5829e2a39.bindPopup(popup_6d7d49d643137d42fc3c6da2e5052aef)
+        ;
+
+        
+    
+    
+            var circle_marker_400ca213feb233a333dd921ba7b05201 = L.circleMarker(
+                [40.283995, 44.3913185],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_49dcd9aba299987bce81c3f8654e7b33 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_83d2ec7f0568d47ecd856e053fb6cca5 = $(`<div id="html_83d2ec7f0568d47ecd856e053fb6cca5" style="width: 100.0%; height: 100.0%;">trip 00000034 (train)<br>3,614 GPS points<br>48.8 km, 64 min<br>UTM EPSG:32638</div>`)[0];
+                popup_49dcd9aba299987bce81c3f8654e7b33.setContent(html_83d2ec7f0568d47ecd856e053fb6cca5);
+            
+        
+
+        circle_marker_400ca213feb233a333dd921ba7b05201.bindPopup(popup_49dcd9aba299987bce81c3f8654e7b33)
+        ;
+
+        
+    
+    
+            var circle_marker_bd5a2cef6c0bf394302bbdeae9a47e12 = L.circleMarker(
+                [41.856224, 12.554349],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_d76feadd14dd46e9cbaebb49624ce12f = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_4113efe76af23648666370037c087188 = $(`<div id="html_4113efe76af23648666370037c087188" style="width: 100.0%; height: 100.0%;">trip 00000035 (train)<br>1,643 GPS points<br>18.5 km, 27 min<br>UTM EPSG:32633</div>`)[0];
+                popup_d76feadd14dd46e9cbaebb49624ce12f.setContent(html_4113efe76af23648666370037c087188);
+            
+        
+
+        circle_marker_bd5a2cef6c0bf394302bbdeae9a47e12.bindPopup(popup_d76feadd14dd46e9cbaebb49624ce12f)
+        ;
+
+        
+    
+    
+            var circle_marker_8973b2f4278920c6ed7e588a1bf834e5 = L.circleMarker(
+                [59.5705315, 30.116331000000002],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_54d1344809e0177965a8a2c539e2ff15 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_f1042941aff51fe09dede38946da6c83 = $(`<div id="html_f1042941aff51fe09dede38946da6c83" style="width: 100.0%; height: 100.0%;">trip 00000036 (train)<br>1,368 GPS points<br>14.8 km, 23 min<br>UTM EPSG:32636</div>`)[0];
+                popup_54d1344809e0177965a8a2c539e2ff15.setContent(html_f1042941aff51fe09dede38946da6c83);
+            
+        
+
+        circle_marker_8973b2f4278920c6ed7e588a1bf834e5.bindPopup(popup_54d1344809e0177965a8a2c539e2ff15)
+        ;
+
+        
+    
+    
+            var circle_marker_2512de8b5b32c2327a5e5db48932a36a = L.circleMarker(
+                [36.678948, 137.220476],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_0ec6db6fe8c9b5399b273eb3cf7db6fd = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_a57341534e4ad80d7e98820b39fd315b = $(`<div id="html_a57341534e4ad80d7e98820b39fd315b" style="width: 100.0%; height: 100.0%;">trip 00000037 (train)<br>677 GPS points<br>8.4 km, 16 min<br>UTM EPSG:32653</div>`)[0];
+                popup_0ec6db6fe8c9b5399b273eb3cf7db6fd.setContent(html_a57341534e4ad80d7e98820b39fd315b);
+            
+        
+
+        circle_marker_2512de8b5b32c2327a5e5db48932a36a.bindPopup(popup_0ec6db6fe8c9b5399b273eb3cf7db6fd)
+        ;
+
+        
+    
+    
+            var circle_marker_233fe18cb3c74adf27d79e686b5498e8 = L.circleMarker(
+                [53.884562, 27.497747],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_2fbcf8e1b5a1266d61e030293e30531c = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c589cdbda936997c58bb54e938acec56 = $(`<div id="html_c589cdbda936997c58bb54e938acec56" style="width: 100.0%; height: 100.0%;">trip 00000038 (train)<br>1,287 GPS points<br>17.2 km, 24 min<br>UTM EPSG:32635</div>`)[0];
+                popup_2fbcf8e1b5a1266d61e030293e30531c.setContent(html_c589cdbda936997c58bb54e938acec56);
+            
+        
+
+        circle_marker_233fe18cb3c74adf27d79e686b5498e8.bindPopup(popup_2fbcf8e1b5a1266d61e030293e30531c)
+        ;
+
+        
+    
+    
+            var circle_marker_0580a78a03b30882267859b7986cf6a5 = L.circleMarker(
+                [60.440031, 24.421705],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_96433efadc0162d54cf3df3160d37dc6 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_6fcc366bcc34ce19092d9a0f085aa479 = $(`<div id="html_6fcc366bcc34ce19092d9a0f085aa479" style="width: 100.0%; height: 100.0%;">trip 00000039 (train)<br>363 GPS points<br>9.9 km, 15 min<br>UTM EPSG:32635</div>`)[0];
+                popup_96433efadc0162d54cf3df3160d37dc6.setContent(html_6fcc366bcc34ce19092d9a0f085aa479);
+            
+        
+
+        circle_marker_0580a78a03b30882267859b7986cf6a5.bindPopup(popup_96433efadc0162d54cf3df3160d37dc6)
+        ;
+
+        
+    
+    
+            var circle_marker_8341c43868d8f5cad4d668e9141dd8ad = L.circleMarker(
+                [40.612236, -8.716081],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_6f1ba80b85f4c91ebfffd57aaa7b1f96 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_de42eb90269d3e527ed56cc02d58ebbf = $(`<div id="html_de42eb90269d3e527ed56cc02d58ebbf" style="width: 100.0%; height: 100.0%;">trip 00000041 (train)<br>1,019 GPS points<br>14.5 km, 19 min<br>UTM EPSG:32629</div>`)[0];
+                popup_6f1ba80b85f4c91ebfffd57aaa7b1f96.setContent(html_de42eb90269d3e527ed56cc02d58ebbf);
+            
+        
+
+        circle_marker_8341c43868d8f5cad4d668e9141dd8ad.bindPopup(popup_6f1ba80b85f4c91ebfffd57aaa7b1f96)
+        ;
+
+        
+    
+    
+            var circle_marker_cd05840dab0a5cdcf70cfe16fb9dd233 = L.circleMarker(
+                [10.496778, 124.012009],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_c100e7a093f18a0977e964999310c12c = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_4aebd61b4619e61b97534631eef22f43 = $(`<div id="html_4aebd61b4619e61b97534631eef22f43" style="width: 100.0%; height: 100.0%;">trip 00000042 (train)<br>7,739 GPS points<br>97.9 km, 206 min<br>UTM EPSG:32651</div>`)[0];
+                popup_c100e7a093f18a0977e964999310c12c.setContent(html_4aebd61b4619e61b97534631eef22f43);
+            
+        
+
+        circle_marker_cd05840dab0a5cdcf70cfe16fb9dd233.bindPopup(popup_c100e7a093f18a0977e964999310c12c)
+        ;
+
+        
+    
+    
+            var circle_marker_3adfc0e3201c5cf73468112906bbe260 = L.circleMarker(
+                [52.1467185, 4.9876135],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_c69d90b34b9537b4b6cab76c9b600cff = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_8700f08db096336d53277e429621f429 = $(`<div id="html_8700f08db096336d53277e429621f429" style="width: 100.0%; height: 100.0%;">trip 00000043 (train)<br>2,322 GPS points<br>63.8 km, 44 min<br>UTM EPSG:32631</div>`)[0];
+                popup_c69d90b34b9537b4b6cab76c9b600cff.setContent(html_8700f08db096336d53277e429621f429);
+            
+        
+
+        circle_marker_3adfc0e3201c5cf73468112906bbe260.bindPopup(popup_c69d90b34b9537b4b6cab76c9b600cff)
+        ;
+
+        
+    
+    
+            var circle_marker_4929c83428a215aec065fe1ade5c2d9b = L.circleMarker(
+                [51.622369000000006, 39.260163000000006],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_3e6b01e3043d569c817a8f4288901830 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_8e94859276174f2a0e1122a412052490 = $(`<div id="html_8e94859276174f2a0e1122a412052490" style="width: 100.0%; height: 100.0%;">trip 00000044 (train)<br>546 GPS points<br>7.9 km, 16 min<br>UTM EPSG:32637</div>`)[0];
+                popup_3e6b01e3043d569c817a8f4288901830.setContent(html_8e94859276174f2a0e1122a412052490);
+            
+        
+
+        circle_marker_4929c83428a215aec065fe1ade5c2d9b.bindPopup(popup_3e6b01e3043d569c817a8f4288901830)
+        ;
+
+        
+    
+    
+            var circle_marker_dcce73189d21782c37563d5ece4c1d1c = L.circleMarker(
+                [52.03925, 12.8084235],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_2bd29dfe78034e090c1d912f0f03be7c = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_f6195de2db9733ce5a9a0a06dbfdc28e = $(`<div id="html_f6195de2db9733ce5a9a0a06dbfdc28e" style="width: 100.0%; height: 100.0%;">trip 00000045 (train)<br>640 GPS points<br>11.7 km, 11 min<br>UTM EPSG:32633</div>`)[0];
+                popup_2bd29dfe78034e090c1d912f0f03be7c.setContent(html_f6195de2db9733ce5a9a0a06dbfdc28e);
+            
+        
+
+        circle_marker_dcce73189d21782c37563d5ece4c1d1c.bindPopup(popup_2bd29dfe78034e090c1d912f0f03be7c)
+        ;
+
+        
+    
+    
+            var circle_marker_04498eb3a2210bd52f4dc7666cbb041a = L.circleMarker(
+                [48.510937, 2.953921],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_15c02a12a8312a21d7130d1b98e137e3 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_68046293859bcecfae2c24c5811ac9e2 = $(`<div id="html_68046293859bcecfae2c24c5811ac9e2" style="width: 100.0%; height: 100.0%;">trip 00000046 (train)<br>1,401 GPS points<br>12.0 km, 38 min<br>UTM EPSG:32631</div>`)[0];
+                popup_15c02a12a8312a21d7130d1b98e137e3.setContent(html_68046293859bcecfae2c24c5811ac9e2);
+            
+        
+
+        circle_marker_04498eb3a2210bd52f4dc7666cbb041a.bindPopup(popup_15c02a12a8312a21d7130d1b98e137e3)
+        ;
+
+        
+    
+    
+            var circle_marker_058f8ef220210f475197bab8c0c185a0 = L.circleMarker(
+                [35.052803999999995, 136.6531485],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_843d90ad87f0e3fac3d957feb31c706b = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_5ec43ba9157ce4eaf067451428e9862f = $(`<div id="html_5ec43ba9157ce4eaf067451428e9862f" style="width: 100.0%; height: 100.0%;">trip 00000047 (train)<br>1,272 GPS points<br>15.2 km, 21 min<br>UTM EPSG:32653</div>`)[0];
+                popup_843d90ad87f0e3fac3d957feb31c706b.setContent(html_5ec43ba9157ce4eaf067451428e9862f);
+            
+        
+
+        circle_marker_058f8ef220210f475197bab8c0c185a0.bindPopup(popup_843d90ad87f0e3fac3d957feb31c706b)
+        ;
+
+        
+    
+    
+            var circle_marker_7ff6e2827fb0cf8946ddcfcae621a087 = L.circleMarker(
+                [52.963728, -1.841173],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_922dd7995a2ec3ca6c79e99b75609e56 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_df4d1417897dfddf30b5d5c002bea268 = $(`<div id="html_df4d1417897dfddf30b5d5c002bea268" style="width: 100.0%; height: 100.0%;">trip 00000048 (train)<br>1,240 GPS points<br>12.0 km, 21 min<br>UTM EPSG:32630</div>`)[0];
+                popup_922dd7995a2ec3ca6c79e99b75609e56.setContent(html_df4d1417897dfddf30b5d5c002bea268);
+            
+        
+
+        circle_marker_7ff6e2827fb0cf8946ddcfcae621a087.bindPopup(popup_922dd7995a2ec3ca6c79e99b75609e56)
+        ;
+
+        
+    
+    
+            var circle_marker_47e601485b95a7c2d45b82a05b682249 = L.circleMarker(
+                [48.026557, 8.748354500000001],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_8e844b78b1cc163bd14a51e08047d263 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_cd4c62ae9a5524c10da4ddd22073369e = $(`<div id="html_cd4c62ae9a5524c10da4ddd22073369e" style="width: 100.0%; height: 100.0%;">trip 00000050 (train)<br>518 GPS points<br>6.7 km, 9 min<br>UTM EPSG:32632</div>`)[0];
+                popup_8e844b78b1cc163bd14a51e08047d263.setContent(html_cd4c62ae9a5524c10da4ddd22073369e);
+            
+        
+
+        circle_marker_47e601485b95a7c2d45b82a05b682249.bindPopup(popup_8e844b78b1cc163bd14a51e08047d263)
+        ;
+
+        
+    
+    
+            var circle_marker_6d3a6e53a078f49847794786ef68c766 = L.circleMarker(
+                [41.703978500000005, 12.545296],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_d704df61424574a98ac9d7df8b249c55 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_0b54ca2b20a9d2d80669fb0e802e059e = $(`<div id="html_0b54ca2b20a9d2d80669fb0e802e059e" style="width: 100.0%; height: 100.0%;">trip 00000051 (train)<br>984 GPS points<br>12.8 km, 16 min<br>UTM EPSG:32633</div>`)[0];
+                popup_d704df61424574a98ac9d7df8b249c55.setContent(html_0b54ca2b20a9d2d80669fb0e802e059e);
+            
+        
+
+        circle_marker_6d3a6e53a078f49847794786ef68c766.bindPopup(popup_d704df61424574a98ac9d7df8b249c55)
+        ;
+
+        
+    
+    
+            var circle_marker_b72fd7833ac7a7d0708b166567dfc7fa = L.circleMarker(
+                [43.3930405, -3.7499710000000004],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_102f8169a919c76d60c1cadd9255d15d = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_b461152fb94ae96698a5f290d4ac5a2d = $(`<div id="html_b461152fb94ae96698a5f290d4ac5a2d" style="width: 100.0%; height: 100.0%;">trip 00000053 (train)<br>1,304 GPS points<br>30.1 km, 22 min<br>UTM EPSG:32630</div>`)[0];
+                popup_102f8169a919c76d60c1cadd9255d15d.setContent(html_b461152fb94ae96698a5f290d4ac5a2d);
+            
+        
+
+        circle_marker_b72fd7833ac7a7d0708b166567dfc7fa.bindPopup(popup_102f8169a919c76d60c1cadd9255d15d)
+        ;
+
+        
+    
+    
+            var circle_marker_4322979ba185f03a529136534832138b = L.circleMarker(
+                [52.288412, 4.850468],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_05768b66775484a28e79c38c374ff9c1 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_ea72b168c0cff84d2eb50110f49f25f4 = $(`<div id="html_ea72b168c0cff84d2eb50110f49f25f4" style="width: 100.0%; height: 100.0%;">trip 00000054 (train)<br>19,313 GPS points<br>169.6 km, 325 min<br>UTM EPSG:32631</div>`)[0];
+                popup_05768b66775484a28e79c38c374ff9c1.setContent(html_ea72b168c0cff84d2eb50110f49f25f4);
+            
+        
+
+        circle_marker_4322979ba185f03a529136534832138b.bindPopup(popup_05768b66775484a28e79c38c374ff9c1)
+        ;
+
+        
+    
+    
+            var circle_marker_cb0cc09f54071551eafb82f0035838e1 = L.circleMarker(
+                [45.2260255, -0.5168189999999999],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_50dd2edbddbb046a52080a46d0690c99 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_3546f89f91c4652439e8ab89ad43e99c = $(`<div id="html_3546f89f91c4652439e8ab89ad43e99c" style="width: 100.0%; height: 100.0%;">trip 00000055 (train)<br>2,472 GPS points<br>83.6 km, 44 min<br>UTM EPSG:32630</div>`)[0];
+                popup_50dd2edbddbb046a52080a46d0690c99.setContent(html_3546f89f91c4652439e8ab89ad43e99c);
+            
+        
+
+        circle_marker_cb0cc09f54071551eafb82f0035838e1.bindPopup(popup_50dd2edbddbb046a52080a46d0690c99)
+        ;
+
+        
+    
+    
+            var circle_marker_9dd9ec647925e3e83ef61b4cce175ac2 = L.circleMarker(
+                [0.334936, -78.133541],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_45598679258ded304faa9585c27f8cac = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c1ef270a34dd22f022ae0724b7ac469f = $(`<div id="html_c1ef270a34dd22f022ae0724b7ac469f" style="width: 100.0%; height: 100.0%;">trip 00000057 (train)<br>1,645 GPS points<br>23.9 km, 28 min<br>UTM EPSG:32617</div>`)[0];
+                popup_45598679258ded304faa9585c27f8cac.setContent(html_c1ef270a34dd22f022ae0724b7ac469f);
+            
+        
+
+        circle_marker_9dd9ec647925e3e83ef61b4cce175ac2.bindPopup(popup_45598679258ded304faa9585c27f8cac)
+        ;
+
+        
+    
+    
+            var circle_marker_beb33a601db457ab0df00f0ed01ff92e = L.circleMarker(
+                [51.020409, 2.341598],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_f570204864d08fed2f3858b37c9c029b = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_79bd137dba2d4675e27a0fa2d4344822 = $(`<div id="html_79bd137dba2d4675e27a0fa2d4344822" style="width: 100.0%; height: 100.0%;">trip 00000058 (train)<br>599 GPS points<br>8.6 km, 12 min<br>UTM EPSG:32631</div>`)[0];
+                popup_f570204864d08fed2f3858b37c9c029b.setContent(html_79bd137dba2d4675e27a0fa2d4344822);
+            
+        
+
+        circle_marker_beb33a601db457ab0df00f0ed01ff92e.bindPopup(popup_f570204864d08fed2f3858b37c9c029b)
+        ;
+
+        
+    
+    
+            var circle_marker_5909d01691ca6fb76e59ac0b68ce1513 = L.circleMarker(
+                [50.245289, 18.9039875],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_323bd01a3a673a6c0d61b034542c7d75 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_43275e2a6b154c38dc7cb68e87551eba = $(`<div id="html_43275e2a6b154c38dc7cb68e87551eba" style="width: 100.0%; height: 100.0%;">trip 00000060 (train)<br>854 GPS points<br>13.7 km, 17 min<br>UTM EPSG:32634</div>`)[0];
+                popup_323bd01a3a673a6c0d61b034542c7d75.setContent(html_43275e2a6b154c38dc7cb68e87551eba);
+            
+        
+
+        circle_marker_5909d01691ca6fb76e59ac0b68ce1513.bindPopup(popup_323bd01a3a673a6c0d61b034542c7d75)
+        ;
+
+        
+    
+    
+            var circle_marker_1841b9d7ac5fcf47d061c149600804a9 = L.circleMarker(
+                [55.862424000000004, 9.844628],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_3a8a2c92953834a75b13b013196c589f = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_23abac82c04a8dee03de8844033a2b2c = $(`<div id="html_23abac82c04a8dee03de8844033a2b2c" style="width: 100.0%; height: 100.0%;">trip 00000061 (train)<br>1,430 GPS points<br>13.7 km, 24 min<br>UTM EPSG:32632</div>`)[0];
+                popup_3a8a2c92953834a75b13b013196c589f.setContent(html_23abac82c04a8dee03de8844033a2b2c);
+            
+        
+
+        circle_marker_1841b9d7ac5fcf47d061c149600804a9.bindPopup(popup_3a8a2c92953834a75b13b013196c589f)
+        ;
+
+        
+    
+    
+            var circle_marker_ad325a2cc42cc295a8814a946c8f61d3 = L.circleMarker(
+                [56.816455000000005, 60.676615999999996],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_3878c777f67f8f56d82fed64f3c15eb2 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_a0afb72d7e89440beadc9f9c16f1c218 = $(`<div id="html_a0afb72d7e89440beadc9f9c16f1c218" style="width: 100.0%; height: 100.0%;">trip 00000062 (train)<br>3,378 GPS points<br>45.7 km, 66 min<br>UTM EPSG:32641</div>`)[0];
+                popup_3878c777f67f8f56d82fed64f3c15eb2.setContent(html_a0afb72d7e89440beadc9f9c16f1c218);
+            
+        
+
+        circle_marker_ad325a2cc42cc295a8814a946c8f61d3.bindPopup(popup_3878c777f67f8f56d82fed64f3c15eb2)
+        ;
+
+        
+    
+    
+            var circle_marker_067b0f144766e8dd17391475c380cbfe = L.circleMarker(
+                [44.209532, 22.506249],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_e0bd2e575d8bcf276df03d0f50b1ed1f = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_090371d79278a0b694adce8f6b042a9d = $(`<div id="html_090371d79278a0b694adce8f6b042a9d" style="width: 100.0%; height: 100.0%;">trip 00000063 (train)<br>2,781 GPS points<br>34.4 km, 49 min<br>UTM EPSG:32634</div>`)[0];
+                popup_e0bd2e575d8bcf276df03d0f50b1ed1f.setContent(html_090371d79278a0b694adce8f6b042a9d);
+            
+        
+
+        circle_marker_067b0f144766e8dd17391475c380cbfe.bindPopup(popup_e0bd2e575d8bcf276df03d0f50b1ed1f)
+        ;
+
+        
+    
+    
+            var circle_marker_799a4286c3c135aecc11d47b857fbab7 = L.circleMarker(
+                [49.641896, 19.914823],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_280c142e24635526c30fe8903b63ef2d = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_31f97104170d1098b5b914c1c61656fe = $(`<div id="html_31f97104170d1098b5b914c1c61656fe" style="width: 100.0%; height: 100.0%;">trip 00000064 (train)<br>2,093 GPS points<br>41.0 km, 36 min<br>UTM EPSG:32634</div>`)[0];
+                popup_280c142e24635526c30fe8903b63ef2d.setContent(html_31f97104170d1098b5b914c1c61656fe);
+            
+        
+
+        circle_marker_799a4286c3c135aecc11d47b857fbab7.bindPopup(popup_280c142e24635526c30fe8903b63ef2d)
+        ;
+
+        
+    
+    
+            var circle_marker_0ea8add8dddf4b1b995d101757b029d6 = L.circleMarker(
+                [53.248327, 49.032553],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_e09b57ed92af1d9c5d49e7441fe0043a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_30bd762e19d34172c1f6794cf7f9fff0 = $(`<div id="html_30bd762e19d34172c1f6794cf7f9fff0" style="width: 100.0%; height: 100.0%;">trip 00000066 (train)<br>4,325 GPS points<br>83.3 km, 72 min<br>UTM EPSG:32639</div>`)[0];
+                popup_e09b57ed92af1d9c5d49e7441fe0043a.setContent(html_30bd762e19d34172c1f6794cf7f9fff0);
+            
+        
+
+        circle_marker_0ea8add8dddf4b1b995d101757b029d6.bindPopup(popup_e09b57ed92af1d9c5d49e7441fe0043a)
+        ;
+
+        
+    
+    
+            var circle_marker_e1ea9d43e7cdbd8b2f24df1c464de5e2 = L.circleMarker(
+                [53.182797, -1.668626],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_7623572e2e59a08d6f35a8b489486a30 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_da101abf1790a772d2561f3e830d31bf = $(`<div id="html_da101abf1790a772d2561f3e830d31bf" style="width: 100.0%; height: 100.0%;">trip 00000068 (train)<br>747 GPS points<br>10.6 km, 13 min<br>UTM EPSG:32630</div>`)[0];
+                popup_7623572e2e59a08d6f35a8b489486a30.setContent(html_da101abf1790a772d2561f3e830d31bf);
+            
+        
+
+        circle_marker_e1ea9d43e7cdbd8b2f24df1c464de5e2.bindPopup(popup_7623572e2e59a08d6f35a8b489486a30)
+        ;
+
+        
+    
+    
+            var circle_marker_91dfc988e0100efc36f98c36dca7af83 = L.circleMarker(
+                [47.540953, -52.768036],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_1cd5fe9e3d5b56cffe6698a9e1e0931e = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_497376cf6d4c884b0bf4c31df2de5e47 = $(`<div id="html_497376cf6d4c884b0bf4c31df2de5e47" style="width: 100.0%; height: 100.0%;">trip 00000069 (train)<br>2,067 GPS points<br>25.8 km, 93 min<br>UTM EPSG:32622</div>`)[0];
+                popup_1cd5fe9e3d5b56cffe6698a9e1e0931e.setContent(html_497376cf6d4c884b0bf4c31df2de5e47);
+            
+        
+
+        circle_marker_91dfc988e0100efc36f98c36dca7af83.bindPopup(popup_1cd5fe9e3d5b56cffe6698a9e1e0931e)
+        ;
+
+        
+    
+    
+            var circle_marker_53040a5d027348465d2b477dad9bb2c7 = L.circleMarker(
+                [48.7049435, -1.5083495],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_4931546086e6eea08a77bfdf83667a28 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_f58b5aefc2d1f054c74b091039c4f645 = $(`<div id="html_f58b5aefc2d1f054c74b091039c4f645" style="width: 100.0%; height: 100.0%;">trip 00000070 (train)<br>2,076 GPS points<br>18.9 km, 38 min<br>UTM EPSG:32630</div>`)[0];
+                popup_4931546086e6eea08a77bfdf83667a28.setContent(html_f58b5aefc2d1f054c74b091039c4f645);
+            
+        
+
+        circle_marker_53040a5d027348465d2b477dad9bb2c7.bindPopup(popup_4931546086e6eea08a77bfdf83667a28)
+        ;
+
+        
+    
+    
+            var circle_marker_dff8658d6f139d2530fe6f52a696b052 = L.circleMarker(
+                [-26.2204035, 27.8936825],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_33b59984e1a284897e7cdd2b62fb0f4c = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_5fd6ecdb2c504a57d2df2b02a6d119a9 = $(`<div id="html_5fd6ecdb2c504a57d2df2b02a6d119a9" style="width: 100.0%; height: 100.0%;">trip 00000071 (train)<br>850 GPS points<br>13.5 km, 20 min<br>UTM EPSG:32735</div>`)[0];
+                popup_33b59984e1a284897e7cdd2b62fb0f4c.setContent(html_5fd6ecdb2c504a57d2df2b02a6d119a9);
+            
+        
+
+        circle_marker_dff8658d6f139d2530fe6f52a696b052.bindPopup(popup_33b59984e1a284897e7cdd2b62fb0f4c)
+        ;
+
+        
+    
+    
+            var circle_marker_4523577b9dc652a6bf1b61c489df79a6 = L.circleMarker(
+                [50.188342, 39.588785],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_6077d3d04a0354c57e158a181d58ffb2 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_2b7b992dfdf3762a88240ef5eb3390c2 = $(`<div id="html_2b7b992dfdf3762a88240ef5eb3390c2" style="width: 100.0%; height: 100.0%;">trip 00000072 (train)<br>969 GPS points<br>11.3 km, 16 min<br>UTM EPSG:32637</div>`)[0];
+                popup_6077d3d04a0354c57e158a181d58ffb2.setContent(html_2b7b992dfdf3762a88240ef5eb3390c2);
+            
+        
+
+        circle_marker_4523577b9dc652a6bf1b61c489df79a6.bindPopup(popup_6077d3d04a0354c57e158a181d58ffb2)
+        ;
+
+        
+    
+    
+            var circle_marker_b427382b0ed06a412d18c5031ac644eb = L.circleMarker(
+                [38.742717, -9.097082],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_1432dad7349e4a0f40ab5709b9bb328b = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c63efece5823070e9daee075edee9568 = $(`<div id="html_c63efece5823070e9daee075edee9568" style="width: 100.0%; height: 100.0%;">trip 00000074 (train)<br>1,929 GPS points<br>33.1 km, 35 min<br>UTM EPSG:32629</div>`)[0];
+                popup_1432dad7349e4a0f40ab5709b9bb328b.setContent(html_c63efece5823070e9daee075edee9568);
+            
+        
+
+        circle_marker_b427382b0ed06a412d18c5031ac644eb.bindPopup(popup_1432dad7349e4a0f40ab5709b9bb328b)
+        ;
+
+        
+    
+    
+            var circle_marker_2e77e647a0d62e73c007e9655e906337 = L.circleMarker(
+                [56.006786, 11.968967],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_af2bce1547590c54b7ef1c0323395521 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_1c7bbac3f07aef88a627a0716c7aeb83 = $(`<div id="html_1c7bbac3f07aef88a627a0716c7aeb83" style="width: 100.0%; height: 100.0%;">trip 00000075 (train)<br>1,628 GPS points<br>13.4 km, 27 min<br>UTM EPSG:32632</div>`)[0];
+                popup_af2bce1547590c54b7ef1c0323395521.setContent(html_1c7bbac3f07aef88a627a0716c7aeb83);
+            
+        
+
+        circle_marker_2e77e647a0d62e73c007e9655e906337.bindPopup(popup_af2bce1547590c54b7ef1c0323395521)
+        ;
+
+        
+    
+    
+            var circle_marker_91e591f17af063a0a16e354dd392237f = L.circleMarker(
+                [44.309715, 3.869148],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_4631a29324b67b49d15f1b922c1ca84e = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c188a9e2021261b58ab393618f17c2c8 = $(`<div id="html_c188a9e2021261b58ab393618f17c2c8" style="width: 100.0%; height: 100.0%;">trip 00000078 (train)<br>2,909 GPS points<br>79.6 km, 964 min<br>UTM EPSG:32631</div>`)[0];
+                popup_4631a29324b67b49d15f1b922c1ca84e.setContent(html_c188a9e2021261b58ab393618f17c2c8);
+            
+        
+
+        circle_marker_91e591f17af063a0a16e354dd392237f.bindPopup(popup_4631a29324b67b49d15f1b922c1ca84e)
+        ;
+
+        
+    
+    
+            var circle_marker_6e24f1784e95b9197f5a887295fdbef6 = L.circleMarker(
+                [55.767978, 37.599462],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_404c28cd82c3370162a03a2995a1379a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_18fc750a62c835e4aed9214854f1c18f = $(`<div id="html_18fc750a62c835e4aed9214854f1c18f" style="width: 100.0%; height: 100.0%;">trip 00000079 (train)<br>689 GPS points<br>11.5 km, 11 min<br>UTM EPSG:32637</div>`)[0];
+                popup_404c28cd82c3370162a03a2995a1379a.setContent(html_18fc750a62c835e4aed9214854f1c18f);
+            
+        
+
+        circle_marker_6e24f1784e95b9197f5a887295fdbef6.bindPopup(popup_404c28cd82c3370162a03a2995a1379a)
+        ;
+
+        
+    
+    
+            var circle_marker_d0c67c48ee3a0696937db1c1ed4fa964 = L.circleMarker(
+                [-34.62505, -58.455722],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_56af54ff2e5548941dd0179b6e208d26 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_80d4c72bcb6128754483a915fcde9b88 = $(`<div id="html_80d4c72bcb6128754483a915fcde9b88" style="width: 100.0%; height: 100.0%;">trip 00000080 (train)<br>2,510 GPS points<br>23.6 km, 46 min<br>UTM EPSG:32721</div>`)[0];
+                popup_56af54ff2e5548941dd0179b6e208d26.setContent(html_80d4c72bcb6128754483a915fcde9b88);
+            
+        
+
+        circle_marker_d0c67c48ee3a0696937db1c1ed4fa964.bindPopup(popup_56af54ff2e5548941dd0179b6e208d26)
+        ;
+
+        
+    
+    
+            var circle_marker_e9bd406d4d811a9dca0478a62984957e = L.circleMarker(
+                [26.467639, -82.140037],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_8534ff9e1fba412004cccd0a5160d1ee = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_939d04ca2b218352298a80b448becccc = $(`<div id="html_939d04ca2b218352298a80b448becccc" style="width: 100.0%; height: 100.0%;">trip 00000081 (train)<br>3,224 GPS points<br>38.8 km, 141 min<br>UTM EPSG:32617</div>`)[0];
+                popup_8534ff9e1fba412004cccd0a5160d1ee.setContent(html_939d04ca2b218352298a80b448becccc);
+            
+        
+
+        circle_marker_e9bd406d4d811a9dca0478a62984957e.bindPopup(popup_8534ff9e1fba412004cccd0a5160d1ee)
+        ;
+
+        
+    
+    
+            var circle_marker_ef0d00b99517459fb893b8c55934aade = L.circleMarker(
+                [59.8998635, 30.6611595],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_ee8a61012b9d60b88b053a6114c5596d = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_aaa21a729327e586f28e667fdbafefd8 = $(`<div id="html_aaa21a729327e586f28e667fdbafefd8" style="width: 100.0%; height: 100.0%;">trip 00000082 (train)<br>4,268 GPS points<br>44.2 km, 71 min<br>UTM EPSG:32636</div>`)[0];
+                popup_ee8a61012b9d60b88b053a6114c5596d.setContent(html_aaa21a729327e586f28e667fdbafefd8);
+            
+        
+
+        circle_marker_ef0d00b99517459fb893b8c55934aade.bindPopup(popup_ee8a61012b9d60b88b053a6114c5596d)
+        ;
+
+        
+    
+    
+            var circle_marker_a9320e9edbab3887a479d90c458148e6 = L.circleMarker(
+                [55.686053, 37.877631],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_13ce2860ac12f4299219e5a219136470 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_81e7fade3d654c7306e1d46b6141586f = $(`<div id="html_81e7fade3d654c7306e1d46b6141586f" style="width: 100.0%; height: 100.0%;">trip 00000083 (train)<br>1,507 GPS points<br>14.8 km, 25 min<br>UTM EPSG:32637</div>`)[0];
+                popup_13ce2860ac12f4299219e5a219136470.setContent(html_81e7fade3d654c7306e1d46b6141586f);
+            
+        
+
+        circle_marker_a9320e9edbab3887a479d90c458148e6.bindPopup(popup_13ce2860ac12f4299219e5a219136470)
+        ;
+
+        
+    
+    
+            var circle_marker_0dc715e12a6f5863ed1ad99aecb77da9 = L.circleMarker(
+                [34.730251, -86.983338],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_e889b0cb62e4a62a8c4bf4d25f488aab = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_acd9c2c6c08750ca80115441674fbd1c = $(`<div id="html_acd9c2c6c08750ca80115441674fbd1c" style="width: 100.0%; height: 100.0%;">trip 00000084 (train)<br>16,031 GPS points<br>136.8 km, 275 min<br>UTM EPSG:32616</div>`)[0];
+                popup_e889b0cb62e4a62a8c4bf4d25f488aab.setContent(html_acd9c2c6c08750ca80115441674fbd1c);
+            
+        
+
+        circle_marker_0dc715e12a6f5863ed1ad99aecb77da9.bindPopup(popup_e889b0cb62e4a62a8c4bf4d25f488aab)
+        ;
+
+        
+    
+    
+            var circle_marker_90d8f413d94623191c1f93c661200b2c = L.circleMarker(
+                [53.84894, 46.3311875],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_1f030f179fac4cc2f8a345ae484e96ae = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_ec2b18a73cd7446660612692b7834a53 = $(`<div id="html_ec2b18a73cd7446660612692b7834a53" style="width: 100.0%; height: 100.0%;">trip 00000085 (train)<br>1,092 GPS points<br>12.8 km, 22 min<br>UTM EPSG:32638</div>`)[0];
+                popup_1f030f179fac4cc2f8a345ae484e96ae.setContent(html_ec2b18a73cd7446660612692b7834a53);
+            
+        
+
+        circle_marker_90d8f413d94623191c1f93c661200b2c.bindPopup(popup_1f030f179fac4cc2f8a345ae484e96ae)
+        ;
+
+        
+    
+    
+            var circle_marker_de92a4b3169a90b8a98b8c77b03f92f2 = L.circleMarker(
+                [56.943182, 60.63493],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_3a603c47aa859310b81320c62a9ba85d = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_7337d509ef1dec69ae61d368cffc1980 = $(`<div id="html_7337d509ef1dec69ae61d368cffc1980" style="width: 100.0%; height: 100.0%;">trip 00000086 (train)<br>4,143 GPS points<br>84.0 km, 69 min<br>UTM EPSG:32641</div>`)[0];
+                popup_3a603c47aa859310b81320c62a9ba85d.setContent(html_7337d509ef1dec69ae61d368cffc1980);
+            
+        
+
+        circle_marker_de92a4b3169a90b8a98b8c77b03f92f2.bindPopup(popup_3a603c47aa859310b81320c62a9ba85d)
+        ;
+
+        
+    
+    
+            var circle_marker_908b343c4bb0b35f3ef0c1a4ce5e6cb3 = L.circleMarker(
+                [61.2478225, 73.4352355],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_29a7c410e39c23aa432e4fb08ebb422f = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_2f2441c1d67641e2a44dcb57276eb59b = $(`<div id="html_2f2441c1d67641e2a44dcb57276eb59b" style="width: 100.0%; height: 100.0%;">trip 00000088 (train)<br>876 GPS points<br>9.4 km, 25 min<br>UTM EPSG:32643</div>`)[0];
+                popup_29a7c410e39c23aa432e4fb08ebb422f.setContent(html_2f2441c1d67641e2a44dcb57276eb59b);
+            
+        
+
+        circle_marker_908b343c4bb0b35f3ef0c1a4ce5e6cb3.bindPopup(popup_29a7c410e39c23aa432e4fb08ebb422f)
+        ;
+
+        
+    
+    
+            var circle_marker_7fb29d80f1b9952bb109a7dee650348e = L.circleMarker(
+                [60.003001499999996, 30.315825500000003],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_1908e3e7a42ba903942a7d804681b3ec = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_deba0c7e28cb9a5ed9d4fd42c6b17a0f = $(`<div id="html_deba0c7e28cb9a5ed9d4fd42c6b17a0f" style="width: 100.0%; height: 100.0%;">trip 00000089 (train)<br>1,228 GPS points<br>14.6 km, 35 min<br>UTM EPSG:32636</div>`)[0];
+                popup_1908e3e7a42ba903942a7d804681b3ec.setContent(html_deba0c7e28cb9a5ed9d4fd42c6b17a0f);
+            
+        
+
+        circle_marker_7fb29d80f1b9952bb109a7dee650348e.bindPopup(popup_1908e3e7a42ba903942a7d804681b3ec)
+        ;
+
+        
+    
+    
+            var circle_marker_ec830f16846c17c0d7a27cea1b2ed085 = L.circleMarker(
+                [51.6238775, 10.441660500000001],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_90e42f031169d2c9daf381212a163013 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_2c27e1cb3fb86b3fa723e271057a7159 = $(`<div id="html_2c27e1cb3fb86b3fa723e271057a7159" style="width: 100.0%; height: 100.0%;">trip 00000090 (train)<br>536 GPS points<br>8.6 km, 2567 min<br>UTM EPSG:32632</div>`)[0];
+                popup_90e42f031169d2c9daf381212a163013.setContent(html_2c27e1cb3fb86b3fa723e271057a7159);
+            
+        
+
+        circle_marker_ec830f16846c17c0d7a27cea1b2ed085.bindPopup(popup_90e42f031169d2c9daf381212a163013)
+        ;
+
+        
+    
+    
+            var circle_marker_7c69e36b4e1eecca758d61963be05692 = L.circleMarker(
+                [52.93554, -2.9260985],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_99748ec939080f838065397e9aeff5ad = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_dc63a4ec14cbe060752c6ab428876fe6 = $(`<div id="html_dc63a4ec14cbe060752c6ab428876fe6" style="width: 100.0%; height: 100.0%;">trip 00000092 (train)<br>7,892 GPS points<br>109.7 km, 132 min<br>UTM EPSG:32630</div>`)[0];
+                popup_99748ec939080f838065397e9aeff5ad.setContent(html_dc63a4ec14cbe060752c6ab428876fe6);
+            
+        
+
+        circle_marker_7c69e36b4e1eecca758d61963be05692.bindPopup(popup_99748ec939080f838065397e9aeff5ad)
+        ;
+
+        
+    
+    
+            var circle_marker_43909b1e1bccd5b9b9b86d3cbb8c7696 = L.circleMarker(
+                [43.399536, -3.79763],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_5cb21d8b50d177072dda24e8d2cbf8ea = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_a400b0ac1d6c02e1c84b6a7f37ee1f0e = $(`<div id="html_a400b0ac1d6c02e1c84b6a7f37ee1f0e" style="width: 100.0%; height: 100.0%;">trip 00000093 (train)<br>1,211 GPS points<br>22.4 km, 21 min<br>UTM EPSG:32630</div>`)[0];
+                popup_5cb21d8b50d177072dda24e8d2cbf8ea.setContent(html_a400b0ac1d6c02e1c84b6a7f37ee1f0e);
+            
+        
+
+        circle_marker_43909b1e1bccd5b9b9b86d3cbb8c7696.bindPopup(popup_5cb21d8b50d177072dda24e8d2cbf8ea)
+        ;
+
+        
+    
+    
+            var circle_marker_a927424ed646b63c7c6a05be0f951659 = L.circleMarker(
+                [50.748111, -1.279523],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_bea70b3271b0d0b03d07fac572bc0d6e = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_6cc9cd0f28c486fa3cbc4a70fbcb2def = $(`<div id="html_6cc9cd0f28c486fa3cbc4a70fbcb2def" style="width: 100.0%; height: 100.0%;">trip 00000095 (train)<br>1,551 GPS points<br>16.1 km, 26 min<br>UTM EPSG:32630</div>`)[0];
+                popup_bea70b3271b0d0b03d07fac572bc0d6e.setContent(html_6cc9cd0f28c486fa3cbc4a70fbcb2def);
+            
+        
+
+        circle_marker_a927424ed646b63c7c6a05be0f951659.bindPopup(popup_bea70b3271b0d0b03d07fac572bc0d6e)
+        ;
+
+        
+    
+    
+            var circle_marker_eae7db0685cb9ceccaae114cc08e829c = L.circleMarker(
+                [36.165688, -95.654127],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_3079bc42af3355ae628403dc4b343272 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_b43b33c72ce7eac81518265da6e877d8 = $(`<div id="html_b43b33c72ce7eac81518265da6e877d8" style="width: 100.0%; height: 100.0%;">trip 00000096 (train)<br>3,271 GPS points<br>71.7 km, 54 min<br>UTM EPSG:32615</div>`)[0];
+                popup_3079bc42af3355ae628403dc4b343272.setContent(html_b43b33c72ce7eac81518265da6e877d8);
+            
+        
+
+        circle_marker_eae7db0685cb9ceccaae114cc08e829c.bindPopup(popup_3079bc42af3355ae628403dc4b343272)
+        ;
+
+        
+    
+    
+            var circle_marker_8a1bcbb4c60e1e21b0bcfd0838905e12 = L.circleMarker(
+                [56.002474, 12.0372685],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_b3ef114cac6914e66c84ef2e677e7999 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_37e4d71f039a109244299c9e28a5db9c = $(`<div id="html_37e4d71f039a109244299c9e28a5db9c" style="width: 100.0%; height: 100.0%;">trip 00000097 (train)<br>1,740 GPS points<br>32.6 km, 29 min<br>UTM EPSG:32633</div>`)[0];
+                popup_b3ef114cac6914e66c84ef2e677e7999.setContent(html_37e4d71f039a109244299c9e28a5db9c);
+            
+        
+
+        circle_marker_8a1bcbb4c60e1e21b0bcfd0838905e12.bindPopup(popup_b3ef114cac6914e66c84ef2e677e7999)
+        ;
+
+        
+    
+    
+            var circle_marker_0f04efd96e8c1c5e9d76b416bc83153d = L.circleMarker(
+                [-29.449047999999998, -51.4243685],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_6b2fbd09bb9a22e5ad0c0ed6f8156103 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_b0b2cbfd822be4ed5b2b68b6c79f9b3d = $(`<div id="html_b0b2cbfd822be4ed5b2b68b6c79f9b3d" style="width: 100.0%; height: 100.0%;">trip 00000098 (train)<br>5,584 GPS points<br>99.7 km, 120 min<br>UTM EPSG:32722</div>`)[0];
+                popup_6b2fbd09bb9a22e5ad0c0ed6f8156103.setContent(html_b0b2cbfd822be4ed5b2b68b6c79f9b3d);
+            
+        
+
+        circle_marker_0f04efd96e8c1c5e9d76b416bc83153d.bindPopup(popup_6b2fbd09bb9a22e5ad0c0ed6f8156103)
+        ;
+
+        
+    
+    
+            var circle_marker_7f1c278100c93b2b2643c059d19ab1bc = L.circleMarker(
+                [34.910675499999996, 135.88034299999998],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e4754afca37118ad4d949bb6180d6096);
+        
+    
+        var popup_43ce67e04bd319418ffb59c6a5d40fa8 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_1b0b905a083ea7df1839a76773e44483 = $(`<div id="html_1b0b905a083ea7df1839a76773e44483" style="width: 100.0%; height: 100.0%;">trip 00000099 (train)<br>2,322 GPS points<br>32.1 km, 39 min<br>UTM EPSG:32653</div>`)[0];
+                popup_43ce67e04bd319418ffb59c6a5d40fa8.setContent(html_1b0b905a083ea7df1839a76773e44483);
+            
+        
+
+        circle_marker_7f1c278100c93b2b2643c059d19ab1bc.bindPopup(popup_43ce67e04bd319418ffb59c6a5d40fa8)
+        ;
+
+        
+    
+    
+            feature_group_e4754afca37118ad4d949bb6180d6096.addTo(map_eba46fca59c5c535a16cd1b8bbdffe84);
+        
+    
+            var feature_group_9c7d31ec492ebf185a311c10eb86f8e6 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_dd6a6333fce6c122f757c3f09f316164 = L.circleMarker(
+                [56.177113, 54.508404],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9c7d31ec492ebf185a311c10eb86f8e6);
+        
+    
+        var popup_c47ceab3c22d5f76af72fe21fb9229d7 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c4debf782e8feedfbe44118013255061 = $(`<div id="html_c4debf782e8feedfbe44118013255061" style="width: 100.0%; height: 100.0%;">trip 00000000 (student_test)<br>2,503 GPS points<br>54.5 km, 42 min<br>UTM EPSG:32640</div>`)[0];
+                popup_c47ceab3c22d5f76af72fe21fb9229d7.setContent(html_c4debf782e8feedfbe44118013255061);
+            
+        
+
+        circle_marker_dd6a6333fce6c122f757c3f09f316164.bindPopup(popup_c47ceab3c22d5f76af72fe21fb9229d7)
+        ;
+
+        
+    
+    
+            var circle_marker_b028496ca15a870bc64d37f5c983f24c = L.circleMarker(
+                [43.411001, 77.2621375],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9c7d31ec492ebf185a311c10eb86f8e6);
+        
+    
+        var popup_da46823d0aa56aa9501dfdbcd3352fef = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_4b513a1db780b833175e05bb3a8f259a = $(`<div id="html_4b513a1db780b833175e05bb3a8f259a" style="width: 100.0%; height: 100.0%;">trip 00000007 (student_test)<br>1,354 GPS points<br>24.7 km, 23 min<br>UTM EPSG:32643</div>`)[0];
+                popup_da46823d0aa56aa9501dfdbcd3352fef.setContent(html_4b513a1db780b833175e05bb3a8f259a);
+            
+        
+
+        circle_marker_b028496ca15a870bc64d37f5c983f24c.bindPopup(popup_da46823d0aa56aa9501dfdbcd3352fef)
+        ;
+
+        
+    
+    
+            var circle_marker_90094d979382159c1742065475422948 = L.circleMarker(
+                [42.651654, 13.664678],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9c7d31ec492ebf185a311c10eb86f8e6);
+        
+    
+        var popup_5333867fefe97852c4ad097615b9d870 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_59de87214aa8438223878497c760a867 = $(`<div id="html_59de87214aa8438223878497c760a867" style="width: 100.0%; height: 100.0%;">trip 00000009 (student_test)<br>1,049 GPS points<br>13.3 km, 17 min<br>UTM EPSG:32633</div>`)[0];
+                popup_5333867fefe97852c4ad097615b9d870.setContent(html_59de87214aa8438223878497c760a867);
+            
+        
+
+        circle_marker_90094d979382159c1742065475422948.bindPopup(popup_5333867fefe97852c4ad097615b9d870)
+        ;
+
+        
+    
+    
+            var circle_marker_586aa398e6ab3267fd21f2312e12e158 = L.circleMarker(
+                [55.310227, 61.129569],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9c7d31ec492ebf185a311c10eb86f8e6);
+        
+    
+        var popup_edcd646e5aa8d86238db1d27ffd1be70 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_fa9032f88684461999010eafa3e926cc = $(`<div id="html_fa9032f88684461999010eafa3e926cc" style="width: 100.0%; height: 100.0%;">trip 00000040 (student_test)<br>2,995 GPS points<br>52.5 km, 50 min<br>UTM EPSG:32641</div>`)[0];
+                popup_edcd646e5aa8d86238db1d27ffd1be70.setContent(html_fa9032f88684461999010eafa3e926cc);
+            
+        
+
+        circle_marker_586aa398e6ab3267fd21f2312e12e158.bindPopup(popup_edcd646e5aa8d86238db1d27ffd1be70)
+        ;
+
+        
+    
+    
+            var circle_marker_d877583b7eca0c8af7ed54acd5b60e3e = L.circleMarker(
+                [56.809715499999996, 35.8739785],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9c7d31ec492ebf185a311c10eb86f8e6);
+        
+    
+        var popup_4393d47fabaa01683c4deaf28e4e8569 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_366c7b5530f5f54091c6669382314e1b = $(`<div id="html_366c7b5530f5f54091c6669382314e1b" style="width: 100.0%; height: 100.0%;">trip 00000052 (student_test)<br>262 GPS points<br>5.6 km, 4 min<br>UTM EPSG:32636</div>`)[0];
+                popup_4393d47fabaa01683c4deaf28e4e8569.setContent(html_366c7b5530f5f54091c6669382314e1b);
+            
+        
+
+        circle_marker_d877583b7eca0c8af7ed54acd5b60e3e.bindPopup(popup_4393d47fabaa01683c4deaf28e4e8569)
+        ;
+
+        
+    
+    
+            var circle_marker_534304dadb81714caeeb09f00565c970 = L.circleMarker(
+                [44.859126, -93.3945625],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9c7d31ec492ebf185a311c10eb86f8e6);
+        
+    
+        var popup_d8e8f8b559dce0ad192c4ae7a32eadd1 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_390ee15c97f3ac9873b0eabae0e1ada7 = $(`<div id="html_390ee15c97f3ac9873b0eabae0e1ada7" style="width: 100.0%; height: 100.0%;">trip 00000056 (student_test)<br>3,958 GPS points<br>71.8 km, 67 min<br>UTM EPSG:32615</div>`)[0];
+                popup_d8e8f8b559dce0ad192c4ae7a32eadd1.setContent(html_390ee15c97f3ac9873b0eabae0e1ada7);
+            
+        
+
+        circle_marker_534304dadb81714caeeb09f00565c970.bindPopup(popup_d8e8f8b559dce0ad192c4ae7a32eadd1)
+        ;
+
+        
+    
+    
+            var circle_marker_2538375c62693287efc3e7f58de6a64c = L.circleMarker(
+                [53.517868, 49.306220499999995],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9c7d31ec492ebf185a311c10eb86f8e6);
+        
+    
+        var popup_821af0fb9a47ffd0547fc109df9c06a3 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_d113dac75da8da705bb5ec846348c1f1 = $(`<div id="html_d113dac75da8da705bb5ec846348c1f1" style="width: 100.0%; height: 100.0%;">trip 00000065 (student_test)<br>768 GPS points<br>9.7 km, 17 min<br>UTM EPSG:32639</div>`)[0];
+                popup_821af0fb9a47ffd0547fc109df9c06a3.setContent(html_d113dac75da8da705bb5ec846348c1f1);
+            
+        
+
+        circle_marker_2538375c62693287efc3e7f58de6a64c.bindPopup(popup_821af0fb9a47ffd0547fc109df9c06a3)
+        ;
+
+        
+    
+    
+            var circle_marker_0a2720974d5d8b71d8c6e55c67265bfb = L.circleMarker(
+                [56.291676, 44.0007035],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9c7d31ec492ebf185a311c10eb86f8e6);
+        
+    
+        var popup_af11a2522550b45ffdd177b23b892b26 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c0975ac759fb46957e6a1f9d7a7a34e1 = $(`<div id="html_c0975ac759fb46957e6a1f9d7a7a34e1" style="width: 100.0%; height: 100.0%;">trip 00000076 (student_test)<br>1,486 GPS points<br>17.2 km, 38 min<br>UTM EPSG:32638</div>`)[0];
+                popup_af11a2522550b45ffdd177b23b892b26.setContent(html_c0975ac759fb46957e6a1f9d7a7a34e1);
+            
+        
+
+        circle_marker_0a2720974d5d8b71d8c6e55c67265bfb.bindPopup(popup_af11a2522550b45ffdd177b23b892b26)
+        ;
+
+        
+    
+    
+            var circle_marker_10c27af31e44ca59721a996184af7261 = L.circleMarker(
+                [61.669172, 50.82847],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9c7d31ec492ebf185a311c10eb86f8e6);
+        
+    
+        var popup_ec0862b5433fd8c928c14f5d95f27475 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_8b03efbac92a7ee38bdc77131c275707 = $(`<div id="html_8b03efbac92a7ee38bdc77131c275707" style="width: 100.0%; height: 100.0%;">trip 00000077 (student_test)<br>3,911 GPS points<br>36.4 km, 65 min<br>UTM EPSG:32639</div>`)[0];
+                popup_ec0862b5433fd8c928c14f5d95f27475.setContent(html_8b03efbac92a7ee38bdc77131c275707);
+            
+        
+
+        circle_marker_10c27af31e44ca59721a996184af7261.bindPopup(popup_ec0862b5433fd8c928c14f5d95f27475)
+        ;
+
+        
+    
+    
+            var circle_marker_016c38e72a8a87a457e36450b8717509 = L.circleMarker(
+                [47.0802645, 2.425128],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9c7d31ec492ebf185a311c10eb86f8e6);
+        
+    
+        var popup_38b5be7202f74983f8b26b41b64a917f = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_7852a03ba717ebfeef856650f278dac5 = $(`<div id="html_7852a03ba717ebfeef856650f278dac5" style="width: 100.0%; height: 100.0%;">trip 00000091 (student_test)<br>874 GPS points<br>11.8 km, 15 min<br>UTM EPSG:32631</div>`)[0];
+                popup_38b5be7202f74983f8b26b41b64a917f.setContent(html_7852a03ba717ebfeef856650f278dac5);
+            
+        
+
+        circle_marker_016c38e72a8a87a457e36450b8717509.bindPopup(popup_38b5be7202f74983f8b26b41b64a917f)
+        ;
+
+        
+    
+    
+            feature_group_9c7d31ec492ebf185a311c10eb86f8e6.addTo(map_eba46fca59c5c535a16cd1b8bbdffe84);
+        
+    
+            var layer_control_e6c85c567a0803b21b1f359d017e5c5c_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_c96050c4aef4258a5c1c34875356b363,
+                },
+                overlays :  {
+                    "train (80 trips)" : feature_group_e4754afca37118ad4d949bb6180d6096,
+                    "student_test (10 trips)" : feature_group_9c7d31ec492ebf185a311c10eb86f8e6,
+                },
+            };
+            let layer_control_e6c85c567a0803b21b1f359d017e5c5c = L.control.layers(
+                layer_control_e6c85c567a0803b21b1f359d017e5c5c_layers.base_layers,
+                layer_control_e6c85c567a0803b21b1f359d017e5c5c_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_eba46fca59c5c535a16cd1b8bbdffe84);
+
+        
+</script>
+</html>

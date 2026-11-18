@@ -1,0 +1,9 @@
+file,column,dtype,trips
+.arcs,from_node,int64,90
+.arcs,to_node,int64,90
+.nodes,lat,float64,90
+.nodes,lon,float64,90
+.route,arc_id,int64,90
+.track,lat,float64,90
+.track,lon,float64,90
+.track,t,float64,90
