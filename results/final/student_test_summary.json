@@ -1,0 +1,28 @@
+{
+  "partition": "student_test",
+  "model": "lightgbm",
+  "used_hmm": true,
+  "hmm_params": {
+    "emission_weight": 1.0,
+    "beta": 5.0,
+    "max_states": 12,
+    "back_tolerance_m": 15.0,
+    "max_speed_mps": 70.0,
+    "search_slack_m": 150.0,
+    "gap_s": 10.0,
+    "min_prob": 1e-06,
+    "max_skip": 3
+  },
+  "trips": 10,
+  "labelled_points": 19133,
+  "pointwise_accuracy": 0.9335180055401662,
+  "pointwise_accuracy_classifier_only": 0.9033084200073171,
+  "direction_agnostic_accuracy": 0.9632571996027806,
+  "mean_route_precision": 0.9826075794229666,
+  "mean_route_recall": 0.996565691014621,
+  "mean_route_f1": 0.9894939127571742,
+  "mean_continuity": 0.9999326599326599,
+  "mean_continuity_classifier_only": 0.9787445606753588,
+  "mean_seconds_per_trip": 0.598850289999973,
+  "max_seconds_per_trip": 1.2008947999565862
+}
