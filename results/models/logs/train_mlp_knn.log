@@ -1,0 +1,13 @@
+train rows=1,914,271 test rows=201,662
+[mlp] fold 0: top1=0.8836 macroF1=0.9314 logloss=0.0639 fit=40.6s
+[mlp] fold 1: top1=0.8767 macroF1=0.9235 logloss=0.0852 fit=38.8s
+[mlp] fold 2: top1=0.8742 macroF1=0.9224 logloss=0.0615 fit=25.0s
+[mlp] fold 3: top1=0.9260 macroF1=0.9525 logloss=0.0572 fit=18.1s
+[mlp] fold 4: top1=0.9097 macroF1=0.9467 logloss=0.0526 fit=25.9s
+[mlp] student_test top1=0.8908 macroF1=0.9357 logloss=0.0541 infer=0.06s
+[knn] fold 0: top1=0.8572 macroF1=0.9113 logloss=0.0950 fit=0.2s
+[knn] fold 1: top1=0.8583 macroF1=0.9021 logloss=0.1209 fit=0.4s
+[knn] fold 2: top1=0.8508 macroF1=0.8984 logloss=0.0825 fit=0.3s
+[knn] fold 3: top1=0.9036 macroF1=0.9347 logloss=0.0860 fit=0.7s
+[knn] fold 4: top1=0.8797 macroF1=0.9236 logloss=0.0854 fit=0.4s
+[knn] student_test top1=0.8698 macroF1=0.9166 logloss=0.0759 infer=43.17s

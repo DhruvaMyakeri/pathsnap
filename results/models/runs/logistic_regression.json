@@ -1,0 +1,85 @@
+{
+  "model": "logistic_regression",
+  "model_type": "logistic_regression",
+  "family": "Linear",
+  "params": {
+    "C": 1.0,
+    "max_iter": 2000
+  },
+  "seed": 42,
+  "features": [
+    "dist",
+    "rank",
+    "dist_minus_min",
+    "dist_ratio",
+    "n_cands",
+    "n_close",
+    "heading_diff",
+    "cos_heading_diff",
+    "heading_diff_long",
+    "speed",
+    "disp",
+    "straightness",
+    "straightness_long",
+    "dt_prev",
+    "dt_next",
+    "arc_length",
+    "frac",
+    "beyond_m",
+    "has_twin",
+    "out_degree_end",
+    "in_degree_start",
+    "ctx_mean_dist",
+    "ctx_max_dist"
+  ],
+  "train_subsample_every_nth_point": 1,
+  "cv": {
+    "top1": [
+      0.890364481593835,
+      0.023162960806658285
+    ],
+    "macro_f1": [
+      0.9250103184150401,
+      0.014156810187566031
+    ],
+    "f1": [
+      0.8656593118249255,
+      0.02654056149814048
+    ],
+    "precision": [
+      0.85789370022183,
+      0.024542432066699968
+    ],
+    "recall": [
+      0.8736136383494234,
+      0.029448706827167093
+    ],
+    "accuracy": [
+      0.9721148349077662,
+      0.006357255707419789
+    ],
+    "log_loss": [
+      0.08319447668698388,
+      0.013025937536938266
+    ]
+  },
+  "student_test": {
+    "accuracy": 0.9731550282239263,
+    "precision": 0.8449741036858249,
+    "recall": 0.8782731406470496,
+    "f1": 0.8613018964633521,
+    "macro_f1": 0.9232206382784656,
+    "log_loss": 0.06969154357778691,
+    "tn": 179386,
+    "fp": 3083,
+    "fn": 2329,
+    "tp": 16804,
+    "top1": 0.8899283959650865,
+    "n_labelled_points": 19133
+  },
+  "fit_seconds_full_train": 5.290741800039541,
+  "inference_seconds_student_test": 0.02233539998997003,
+  "inference_ms_per_1000_points": 1.1657306884117968,
+  "n_train_rows_full": 1744717,
+  "n_test_rows_labelled": 201602
+}

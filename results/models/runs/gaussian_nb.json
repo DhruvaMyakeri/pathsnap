@@ -1,0 +1,84 @@
+{
+  "model": "gaussian_nb",
+  "model_type": "gaussian_nb",
+  "family": "Probabilistic",
+  "params": {
+    "var_smoothing": 1e-09
+  },
+  "seed": 42,
+  "features": [
+    "dist",
+    "rank",
+    "dist_minus_min",
+    "dist_ratio",
+    "n_cands",
+    "n_close",
+    "heading_diff",
+    "cos_heading_diff",
+    "heading_diff_long",
+    "speed",
+    "disp",
+    "straightness",
+    "straightness_long",
+    "dt_prev",
+    "dt_next",
+    "arc_length",
+    "frac",
+    "beyond_m",
+    "has_twin",
+    "out_degree_end",
+    "in_degree_start",
+    "ctx_mean_dist",
+    "ctx_max_dist"
+  ],
+  "train_subsample_every_nth_point": 1,
+  "cv": {
+    "top1": [
+      0.865823362799287,
+      0.015186916806009799
+    ],
+    "macro_f1": [
+      0.8515809709924197,
+      0.006035060652562632
+    ],
+    "f1": [
+      0.7418311830581756,
+      0.01414802681232326
+    ],
+    "precision": [
+      0.6201885191291769,
+      0.018035323807777635
+    ],
+    "recall": [
+      0.9236765879352724,
+      0.02608341233355838
+    ],
+    "accuracy": [
+      0.9331627953434751,
+      0.012929272791209685
+    ],
+    "log_loss": [
+      0.5486390867149904,
+      0.12792114555888112
+    ]
+  },
+  "student_test": {
+    "accuracy": 0.9286366206684458,
+    "precision": 0.5758001661023446,
+    "recall": 0.9421418491611352,
+    "f1": 0.714764368841571,
+    "macro_f1": 0.8369904221994767,
+    "log_loss": 0.5814070673394798,
+    "tn": 169189,
+    "fp": 13280,
+    "fn": 1107,
+    "tp": 18026,
+    "top1": 0.8611299848429416,
+    "n_labelled_points": 19133
+  },
+  "fit_seconds_full_train": 1.096527999965474,
+  "inference_seconds_student_test": 0.07038320001447573,
+  "inference_ms_per_1000_points": 3.6734446771647042,
+  "n_train_rows_full": 1744717,
+  "n_test_rows_labelled": 201602
+}

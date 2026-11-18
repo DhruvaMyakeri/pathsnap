@@ -1,0 +1,91 @@
+{
+  "model": "lightgbm",
+  "model_type": "lightgbm",
+  "family": "Boosting",
+  "params": {
+    "n_estimators": 600,
+    "learning_rate": 0.05,
+    "num_leaves": 63,
+    "min_child_samples": 50,
+    "subsample": 0.8,
+    "subsample_freq": 1,
+    "colsample_bytree": 0.8,
+    "reg_lambda": 1.0
+  },
+  "seed": 42,
+  "features": [
+    "dist",
+    "rank",
+    "dist_minus_min",
+    "dist_ratio",
+    "n_cands",
+    "n_close",
+    "heading_diff",
+    "cos_heading_diff",
+    "heading_diff_long",
+    "speed",
+    "disp",
+    "straightness",
+    "straightness_long",
+    "dt_prev",
+    "dt_next",
+    "arc_length",
+    "frac",
+    "beyond_m",
+    "has_twin",
+    "out_degree_end",
+    "in_degree_start",
+    "ctx_mean_dist",
+    "ctx_max_dist"
+  ],
+  "train_subsample_every_nth_point": 1,
+  "cv": {
+    "top1": [
+      0.8991663458488952,
+      0.023870703174103315
+    ],
+    "macro_f1": [
+      0.9395716587375966,
+      0.014137582080201518
+    ],
+    "f1": [
+      0.8913604658704501,
+      0.026204947249689463
+    ],
+    "precision": [
+      0.9098457036568964,
+      0.0186104473364518
+    ],
+    "recall": [
+      0.8737662405089839,
+      0.034088376752660694
+    ],
+    "accuracy": [
+      0.9781367109565438,
+      0.0058203425363975
+    ],
+    "log_loss": [
+      0.05904313058978324,
+      0.016609170021207768
+    ]
+  },
+  "student_test": {
+    "accuracy": 0.9806747948929078,
+    "precision": 0.9137116481129514,
+    "recall": 0.8794229864631788,
+    "f1": 0.8962394801320975,
+    "macro_f1": 0.942792328509832,
+    "log_loss": 0.047229915563944326,
+    "tn": 180880,
+    "fp": 1589,
+    "fn": 2307,
+    "tp": 16826,
+    "top1": 0.9033084200073171,
+    "n_labelled_points": 19133
+  },
+  "fit_seconds_full_train": 37.48155309999129,
+  "inference_seconds_student_test": 0.7595301999826916,
+  "inference_ms_per_1000_points": 39.64145093855384,
+  "n_train_rows_full": 1744717,
+  "n_test_rows_labelled": 201602
+}

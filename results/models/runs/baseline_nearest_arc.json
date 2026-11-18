@@ -1,0 +1,82 @@
+{
+  "model": "baseline_nearest_arc",
+  "model_type": "baseline_nearest_arc",
+  "family": "Non-learned rule",
+  "params": {},
+  "seed": 42,
+  "features": [
+    "dist",
+    "rank",
+    "dist_minus_min",
+    "dist_ratio",
+    "n_cands",
+    "n_close",
+    "heading_diff",
+    "cos_heading_diff",
+    "heading_diff_long",
+    "speed",
+    "disp",
+    "straightness",
+    "straightness_long",
+    "dt_prev",
+    "dt_next",
+    "arc_length",
+    "frac",
+    "beyond_m",
+    "has_twin",
+    "out_degree_end",
+    "in_degree_start",
+    "ctx_mean_dist",
+    "ctx_max_dist"
+  ],
+  "train_subsample_every_nth_point": 1,
+  "cv": {
+    "top1": [
+      0.5637111630432511,
+      0.053945559702092576
+    ],
+    "macro_f1": [
+      0.7561482133221343,
+      0.03167248551335062
+    ],
+    "f1": [
+      0.5637771678620715,
+      0.05395545697168079
+    ],
+    "precision": [
+      0.5637111630432511,
+      0.053945559702092576
+    ],
+    "recall": [
+      0.5638432098591976,
+      0.05396549595370736
+    ],
+    "accuracy": [
+      0.9083651893714219,
+      0.025281430830467275
+    ],
+    "log_loss": [
+      NaN,
+      NaN
+    ]
+  },
+  "student_test": {
+    "accuracy": 0.9117766688822532,
+    "precision": 0.535200961689228,
+    "recall": 0.535200961689228,
+    "f1": 0.535200961689228,
+    "macro_f1": 0.7432319579722357,
+    "log_loss": NaN,
+    "tn": 173576,
+    "fp": 8893,
+    "fn": 8893,
+    "tp": 10240,
+    "top1": 0.535200961689228,
+    "n_labelled_points": 19133
+  },
+  "fit_seconds_full_train": 0.0,
+  "inference_seconds_student_test": 0.0005182999884709716,
+  "inference_ms_per_1000_points": 0.027051147623745907,
+  "n_train_rows_full": 0,
+  "n_test_rows_labelled": 201602
+}

@@ -1,0 +1,86 @@
+{
+  "model": "random_forest",
+  "model_type": "random_forest",
+  "family": "Ensemble (bagging)",
+  "params": {
+    "n_estimators": 200,
+    "min_samples_leaf": 20,
+    "max_features": "sqrt"
+  },
+  "seed": 42,
+  "features": [
+    "dist",
+    "rank",
+    "dist_minus_min",
+    "dist_ratio",
+    "n_cands",
+    "n_close",
+    "heading_diff",
+    "cos_heading_diff",
+    "heading_diff_long",
+    "speed",
+    "disp",
+    "straightness",
+    "straightness_long",
+    "dt_prev",
+    "dt_next",
+    "arc_length",
+    "frac",
+    "beyond_m",
+    "has_twin",
+    "out_degree_end",
+    "in_degree_start",
+    "ctx_mean_dist",
+    "ctx_max_dist"
+  ],
+  "train_subsample_every_nth_point": 2,
+  "cv": {
+    "top1": [
+      0.894152876682071,
+      0.023375705945459922
+    ],
+    "macro_f1": [
+      0.9389862008651451,
+      0.013807669134414833
+    ],
+    "f1": [
+      0.8902171027823641,
+      0.025583727486902963
+    ],
+    "precision": [
+      0.917623863314739,
+      0.01634055929470331
+    ],
+    "recall": [
+      0.8646773218419679,
+      0.03578472673353609
+    ],
+    "accuracy": [
+      0.978069574126805,
+      0.005819766439364492
+    ],
+    "log_loss": [
+      0.05765841899374733,
+      0.01301189884433737
+    ]
+  },
+  "student_test": {
+    "accuracy": 0.9802978145058084,
+    "precision": 0.9154836941627843,
+    "recall": 0.8729943030366383,
+    "f1": 0.8937342821980845,
+    "macro_f1": 0.9414383306809746,
+    "log_loss": 0.049087468631535444,
+    "tn": 180927,
+    "fp": 1542,
+    "fn": 2430,
+    "tp": 16703,
+    "top1": 0.8971933308942664,
+    "n_labelled_points": 19133
+  },
+  "fit_seconds_full_train": 82.46397609997075,
+  "inference_seconds_student_test": 0.42089449998456985,
+  "inference_ms_per_1000_points": 21.967353861407613,
+  "n_train_rows_full": 871829,
+  "n_test_rows_labelled": 201602
+}

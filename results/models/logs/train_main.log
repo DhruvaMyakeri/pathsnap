@@ -1,0 +1,25 @@
+train rows=1,914,271 test rows=201,662
+[lightgbm] fold 0: top1=0.8899 macroF1=0.9358 logloss=0.0562 fit=27.0s
+[lightgbm] fold 1: top1=0.8775 macroF1=0.9254 logloss=0.0876 fit=30.4s
+[lightgbm] fold 2: top1=0.8838 macroF1=0.9281 logloss=0.0559 fit=21.5s
+[lightgbm] fold 3: top1=0.9368 macroF1=0.9573 logloss=0.0506 fit=13.4s
+[lightgbm] fold 4: top1=0.9078 macroF1=0.9513 logloss=0.0449 fit=13.1s
+[lightgbm] student_test top1=0.9033 macroF1=0.9428 logloss=0.0472 infer=0.76s
+[logistic_regression] fold 0: top1=0.8763 macroF1=0.9191 logloss=0.0815 fit=3.5s
+[logistic_regression] fold 1: top1=0.8703 macroF1=0.9114 logloss=0.1060 fit=3.2s
+[logistic_regression] fold 2: top1=0.8762 macroF1=0.9146 logloss=0.0751 fit=3.1s
+[logistic_regression] fold 3: top1=0.9239 macroF1=0.9437 logloss=0.0786 fit=3.5s
+[logistic_regression] fold 4: top1=0.9052 macroF1=0.9362 logloss=0.0748 fit=3.6s
+[logistic_regression] student_test top1=0.8899 macroF1=0.9232 logloss=0.0697 infer=0.02s
+[gaussian_nb] fold 0: top1=0.8612 macroF1=0.8476 logloss=0.4827 fit=0.9s
+[gaussian_nb] fold 1: top1=0.8522 macroF1=0.8500 logloss=0.6353 fit=1.0s
+[gaussian_nb] fold 2: top1=0.8519 macroF1=0.8462 logloss=0.4689 fit=1.1s
+[gaussian_nb] fold 3: top1=0.8805 macroF1=0.8527 logloss=0.7289 fit=1.0s
+[gaussian_nb] fold 4: top1=0.8833 macroF1=0.8614 logloss=0.4273 fit=1.0s
+[gaussian_nb] student_test top1=0.8611 macroF1=0.8370 logloss=0.5814 infer=0.07s
+[random_forest] fold 0: top1=0.8811 macroF1=0.9361 logloss=0.0557 fit=66.3s
+[random_forest] fold 1: top1=0.8742 macroF1=0.9244 logloss=0.0790 fit=61.5s
+[random_forest] fold 2: top1=0.8793 macroF1=0.9280 logloss=0.0581 fit=86.7s
+[random_forest] fold 3: top1=0.9293 macroF1=0.9558 logloss=0.0512 fit=61.2s
+[random_forest] fold 4: top1=0.9069 macroF1=0.9507 logloss=0.0444 fit=63.3s
+[random_forest] student_test top1=0.8972 macroF1=0.9414 logloss=0.0491 infer=0.42s
