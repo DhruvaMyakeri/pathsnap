@@ -1,0 +1,26 @@
+{
+  "model": "lightgbm",
+  "objective": "mean CV Top-1 accuracy (3 trip-grouped folds, train)",
+  "best_value": 0.8969111575104357,
+  "best_trial": 27,
+  "params": {
+    "n_estimators": 875,
+    "learning_rate": 0.023619345141514477,
+    "num_leaves": 60,
+    "min_child_samples": 24,
+    "subsample": 0.8565405722143823,
+    "colsample_bytree": 0.4033663838842876,
+    "reg_lambda": 0.4782843849439511,
+    "reg_alpha": 0.013176449521576582
+  },
+  "n_trials": 40,
+  "n_complete": 22,
+  "n_pruned": 18,
+  "search_seconds_this_run": 1061.6273950999603,
+  "search_setup": {
+    "folds": 3,
+    "train_every_nth_point": 2,
+    "sampler": "TPE (multivariate, 8 random start-up trials)",
+    "pruner": "Median"
+  }
+}

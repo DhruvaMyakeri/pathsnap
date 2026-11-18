@@ -1,0 +1,92 @@
+{
+  "model": "lightgbm_tuned",
+  "model_type": "lightgbm",
+  "family": "Boosting",
+  "params": {
+    "n_estimators": 875,
+    "learning_rate": 0.023619345141514477,
+    "num_leaves": 60,
+    "min_child_samples": 24,
+    "subsample": 0.8565405722143823,
+    "subsample_freq": 1,
+    "colsample_bytree": 0.4033663838842876,
+    "reg_lambda": 0.4782843849439511,
+    "reg_alpha": 0.013176449521576582
+  },
+  "seed": 42,
+  "features": [
+    "dist",
+    "rank",
+    "dist_minus_min",
+    "dist_ratio",
+    "n_cands",
+    "n_close",
+    "heading_diff",
+    "cos_heading_diff",
+    "heading_diff_long",
+    "speed",
+    "disp",
+    "straightness",
+    "straightness_long",
+    "dt_prev",
+    "dt_next",
+    "arc_length",
+    "frac",
+    "beyond_m",
+    "has_twin",
+    "out_degree_end",
+    "in_degree_start",
+    "ctx_mean_dist",
+    "ctx_max_dist"
+  ],
+  "train_subsample_every_nth_point": 1,
+  "cv": {
+    "top1": [
+      0.8986338509707587,
+      0.023531613509132097
+    ],
+    "macro_f1": [
+      0.9400794154957216,
+      0.014458511687796301
+    ],
+    "f1": [
+      0.8922601806030984,
+      0.026763943927052808
+    ],
+    "precision": [
+      0.9117308650466533,
+      0.020123651057826195
+    ],
+    "recall": [
+      0.8737270989928472,
+      0.03363030049937992
+    ],
+    "accuracy": [
+      0.9783410265763907,
+      0.005893717461789868
+    ],
+    "log_loss": [
+      0.05712886866143636,
+      0.014694481460226306
+    ]
+  },
+  "student_test": {
+    "accuracy": 0.9806549538199025,
+    "precision": 0.9137828000217308,
+    "recall": 0.879109392149689,
+    "f1": 0.8961108151305275,
+    "macro_f1": 0.9427226430601443,
+    "log_loss": 0.04743791857837831,
+    "tn": 180882,
+    "fp": 1587,
+    "fn": 2313,
+    "tp": 16820,
+    "top1": 0.9004338054669943,
+    "n_labelled_points": 19133
+  },
+  "fit_seconds_full_train": 50.48907660000259,
+  "inference_seconds_student_test": 1.344253299990669,
+  "inference_ms_per_1000_points": 70.15935803709128,
+  "n_train_rows_full": 1744717,
+  "n_test_rows_labelled": 201602
+}
