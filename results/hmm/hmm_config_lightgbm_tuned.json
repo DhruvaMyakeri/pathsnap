@@ -1,0 +1,46 @@
+{
+  "emission_weight": 1.0,
+  "beta": 5.0,
+  "max_states": 8,
+  "back_tolerance_m": 15.0,
+  "max_speed_mps": 70.0,
+  "search_slack_m": 150.0,
+  "gap_s": 10.0,
+  "min_prob": 1e-06,
+  "max_skip": 3,
+  "model": "lightgbm_tuned",
+  "tuned_on": "30 training trips, out-of-fold probabilities",
+  "objective": "pointwise accuracy over labelled points",
+  "objective_value": 0.935328859998602,
+  "train80_accuracy": {
+    "classifier_only": 0.9013570557180951,
+    "hmm_default": 0.9302957021170933,
+    "hmm_tuned": 0.9302957021170933
+  },
+  "student_test_accuracy": {
+    "classifier_only": 0.9004338054669943,
+    "hmm_default": 0.9327340197564418,
+    "hmm_tuned": 0.9327340197564418
+  },
+  "grid": {
+    "beta": [
+      0.5,
+      1,
+      2,
+      3,
+      5,
+      8,
+      12,
+      20,
+      35,
+      60,
+      100
+    ],
+    "max_states": [
+      4,
+      8,
+      12
+    ]
+  },
+  "seconds": 36.76718740002252
+}
