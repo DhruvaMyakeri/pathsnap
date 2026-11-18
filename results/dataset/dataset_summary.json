@@ -1,0 +1,29 @@
+{
+  "train": {
+    "trips": 80,
+    "points": 208417,
+    "labelled_points": 185254,
+    "labelled_share": 0.8888622329272564,
+    "candidate_rows": 1914271,
+    "positive_rows": 185221,
+    "candidate_miss_rate": 0.00017813380547793134,
+    "build_seconds": 9.183127800002694
+  },
+  "student_test": {
+    "trips": 10,
+    "points": 19160,
+    "labelled_points": 19133,
+    "labelled_share": 0.9985908141962422,
+    "candidate_rows": 201662,
+    "positive_rows": 19133,
+    "candidate_miss_rate": 0.0,
+    "build_seconds": 0.9369357000105083
+  },
+  "config": {
+    "CAND_RADIUS_M": 50.0,
+    "CAND_MAX_RADIUS_M": 200.0,
+    "CAND_MAX_K": 32,
+    "LABEL_MAX_DIST_M": 50.0,
+    "LABEL_COST_CAP_M": 100.0
+  }
+}
